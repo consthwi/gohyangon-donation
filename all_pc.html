@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>고향온 디자이너용 SB — 전 페이지 (PC) · 단일 import</title>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing:border-box; margin:0; padding:0; font-family:'Pretendard',-apple-system,sans-serif; }
+  :root{ --img:#c9ccd1; --img2:#b1b6bd; --line:#d0d4d9; --ink:#212529; --sub:#6b7280; --accent:#4d535b; --dark:#2b2f36; --star:#8a9099; }
+  body { color:#212529; background:#e8eaed; }
+
+  /* ===== 페이지(영역) 블록 — 배경색만 다르게 구분 ===== */
+  .pageblock{ padding:34px 0; }
+  .pageblock.p-main{ background:#eef0f3; }   /* 메인 = 쿨 그레이 */
+  .pageblock.p-gift{ background:#f2efe8; }   /* 답례품 = 웜 그레이 */
+  .pageblock .inner{ max-width:1340px; margin:0 auto; padding:0 24px; display:flex; flex-direction:column; gap:22px; align-items:center; }
+  .plabel{ width:100%; max-width:1280px; background:var(--dark); color:#fff; border-radius:8px; padding:11px 16px; font-size:14px; font-weight:700; display:flex; align-items:center; gap:10px; }
+  .plabel .id{ background:var(--accent); color:#fff; border-radius:5px; padding:2px 9px; font-size:12px; }
+  .plabel small{ color:#aeb4bd; font-weight:500; font-size:12px; margin-left:auto; }
+  .legend{ width:100%; max-width:1280px; display:flex; flex-wrap:wrap; align-items:center; gap:18px; background:#fff; border:1px solid var(--line); border-radius:8px; padding:10px 14px; font-size:12.5px; color:var(--sub); }
+  .legend b{ color:var(--ink); }
+  .swatch{ display:inline-block; width:26px; height:14px; background:var(--img); border:1px solid var(--line); vertical-align:middle; margin-right:6px; border-radius:2px; }
+  .dot-legend{ display:inline-flex; width:18px;height:18px; background:var(--accent); color:#fff; border-radius:50%; font-size:10px; font-weight:700; align-items:center; justify-content:center; margin-right:6px; }
+  .smp{ color:#9aa0a8; border-bottom:1px dotted #b3b9c0; } .smp sup{ color:var(--accent); font-size:9px; font-weight:700; }
+
+  .device{ background:#fff; border:1px solid var(--line); box-shadow:0 6px 24px rgba(0,0,0,.08); overflow:hidden; position:relative; width:1280px; }
+  .sec{ position:relative; }
+  .dot{ position:absolute; top:8px; left:8px; z-index:5; width:22px; height:22px; background:var(--accent); color:#fff; border-radius:50%; font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; box-shadow:0 1px 4px rgba(0,0,0,.25); }
+  .desc-col{ width:100%; max-width:1280px; }
+  .desc h3{ font-size:15px; margin-bottom:10px; }
+  table.d{ width:100%; border-collapse:collapse; font-size:12.5px; background:#fff; }
+  table.d th{ background:var(--dark); color:#fff; padding:8px 10px; text-align:left; font-size:11.5px; border:1px solid var(--dark); }
+  table.d td{ padding:8px 10px; border:1px solid var(--line); vertical-align:top; line-height:1.55; }
+  table.d .n{ color:var(--accent); font-weight:800; text-align:center; width:26px; } table.d .area{ font-weight:700; width:130px; }
+  .badge{ display:inline-block; font-size:10px; font-weight:700; padding:1px 6px; border-radius:4px; margin-right:4px; }
+  .b-fix{ background:#2b2f36; color:#fff; } .b-bo{ background:#eef0f3; color:#555; border:1px solid var(--line); } .b-open{ background:#fff; color:#4d535b; border:1px solid #c4c8ce; }
+
+  /* 헤더 */
+  .hd{ height:66px; display:flex; align-items:center; gap:28px; padding:0 30px; border-bottom:1px solid var(--line); background:#fff; }
+  .hd .logo{ font-weight:800; font-size:19px; } .hd .logo span{ color:var(--sub); font-weight:600; font-size:15px; }
+  .hd .nav{ display:flex; gap:24px; font-size:15px; font-weight:600; color:#555; }
+  .hd .nav .on{ color:var(--ink); font-weight:800; }
+  .hd .sp{ flex:1; }
+  .hd .icons{ display:flex; align-items:center; gap:16px; color:#555; font-size:18px; }
+  .hd .login{ background:var(--ink); color:#fff; padding:8px 18px; border-radius:20px; font-size:13px; font-weight:700; }
+
+  /* HERO */
+  .hero{ position:relative; height:360px; }
+  .hero .img{ position:absolute; inset:0; background:var(--img2); display:flex; align-items:center; justify-content:center; }
+  .hero .img .tag{ color:#fff; opacity:.7; font-size:13px; letter-spacing:1px; }
+  .hero .copy{ position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; gap:14px; padding:0 60px; }
+  .hero .pill{ align-self:flex-start; background:rgba(255,255,255,.9); color:var(--ink); padding:5px 14px; border-radius:16px; font-size:13px; font-weight:700; }
+  .hero h1{ font-size:38px; font-weight:800; color:#fff; line-height:1.25; text-shadow:0 2px 12px rgba(0,0,0,.3); }
+  .hero p{ font-size:17px; color:#f1f1f1; text-shadow:0 1px 8px rgba(0,0,0,.3); }
+
+  /* 프로모션 배너 (1-show 슬라이드) — 메인은 inset(.promowrap), 답례품은 full */
+  .promowrap{ padding:18px 40px 0; }
+  .promo{ position:relative; height:120px; background:var(--img2); display:flex; align-items:center; justify-content:center; border-radius:8px; overflow:hidden; }
+  .promo.full{ border-radius:8px; height:120px; margin:18px 40px 4px; }  /* @3 배너: 풀블리드 금지 — 컨테이너 폭(메인 promowrap과 동일 인셋)으로 통일 */
+  .promo .tag{ position:absolute; top:8px; right:14px; color:#fff; opacity:.6; font-size:11px; }
+  .promo .pcopy{ color:#fff; text-align:center; text-shadow:0 1px 8px rgba(0,0,0,.3); }
+  .promo .pcopy .big{ font-size:22px; font-weight:800; } .promo .pcopy .sub{ font-size:13px; margin-top:6px; opacity:.95; }
+  .promo .pcopy .smp{ color:#fff; border-bottom-color:rgba(255,255,255,.55); } .promo .pcopy .smp sup{ color:#fff; }  /* 배너 위 샘플 텍스트 가독성 — 흰색 */
+  .promo .arrow{ position:absolute; top:50%; transform:translateY(-50%); color:#fff; opacity:.7; font-size:22px; } .promo .arrow.l{ left:14px; } .promo .arrow.r{ right:14px; }
+  .promo .dots{ position:absolute; bottom:10px; left:50%; transform:translateX(-50%); display:flex; gap:6px; } .promo .dots i{ width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,.5); } .promo .dots i.on{ background:#fff; }
+
+  .block{ padding:34px 28px; border-bottom:1px solid var(--line); }
+  .block .head{ display:flex; align-items:baseline; gap:10px; margin-bottom:18px; }
+  .block .head h2{ font-size:22px; font-weight:800; } .block .head .s{ font-size:13.5px; color:var(--sub); }
+  .more{ margin-left:auto; font-size:13px; color:var(--sub); font-weight:600; }
+
+  .grid5{ display:grid; grid-template-columns:repeat(5,1fr); gap:14px; }
+  .grid4{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+  .grid3{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .pcard{ border:1px solid var(--line); border-radius:10px; overflow:hidden; background:#fff; position:relative; }
+  .pcard .pimg{ height:170px; background:var(--img); display:flex; align-items:center; justify-content:center; color:#9aa0a8; font-size:12px; }
+  .pcard .rank{ position:absolute; top:10px; left:10px; background:var(--ink); color:#fff; width:26px; height:26px; border-radius:6px; font-size:14px; font-weight:800; display:flex; align-items:center; justify-content:center; }
+  .pcard .pbody{ padding:12px 14px; }
+  .pcard .psrc{ font-size:11px; color:var(--sub); } .pcard .pname{ font-size:14px; font-weight:600; margin-top:2px; line-height:1.4; }
+  .pcard .pprice{ font-size:15px; font-weight:800; margin-top:6px; } .pcard .pprice em{ font-size:11px; font-weight:600; color:var(--sub); font-style:normal; }
+  .pcard .pmeta{ display:flex; align-items:center; gap:6px; margin-top:6px; }
+  .gtag{ display:inline-block; font-size:10.5px; font-weight:700; color:#4d535b; border:1px solid #c4c8ce; border-radius:4px; padding:1px 6px; }
+  .rv{ font-size:11px; color:var(--sub); } .rv b{ color:var(--star); }
+
+  /* 응원 메시지 */
+  .cheer{ padding:24px 28px; border-bottom:1px solid var(--line); }
+  .cheer .ch-head{ display:flex; align-items:baseline; gap:10px; font-size:17px; font-weight:800; margin-bottom:14px; }
+  .cheer .ch-note{ margin-left:auto; font-size:12px; color:var(--sub); font-weight:500; border:1px dashed var(--line); border-radius:8px; padding:5px 10px; }
+  .cheer .ch-item{ display:flex; align-items:center; gap:10px; padding:12px 16px; border:1px solid var(--line); border-radius:10px; margin-bottom:8px; font-size:14px; background:#fafbfc; }
+  .cheer .ch-item .bell{ font-size:16px; } .cheer .ch-item .time{ font-weight:700; white-space:nowrap; } .cheer .ch-item .msg{ color:#4d535b; font-style:italic; }
+
+  /* 편지 */
+  .letter{ display:flex; gap:24px; padding:34px 28px; border-bottom:1px solid var(--line); align-items:stretch; }
+  .letter .txt{ flex:1.4; display:flex; flex-direction:column; justify-content:center; gap:14px; }
+  .letter .quote{ font-size:20px; font-weight:700; line-height:1.6; } .letter .sign{ font-size:14px; color:var(--sub); }
+  .letter .photo{ flex:1; min-height:200px; background:var(--img); border-radius:10px; display:flex; align-items:center; justify-content:center; color:#9aa0a8; font-size:12px; }
+
+  /* 임팩트 */
+  .stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:20px; }
+  .stat{ background:#f5f6f8; border:1px solid var(--line); border-radius:10px; padding:18px; text-align:center; }
+  .stat .num{ font-size:28px; font-weight:800; } .stat .lbl{ font-size:13px; color:var(--sub); margin-top:4px; }
+  .hcard{ border:1px solid var(--line); border-radius:10px; overflow:hidden; background:#fff; }
+  .hcard .himg{ height:140px; background:var(--img); display:flex; align-items:center; justify-content:center; color:#9aa0a8; font-size:12px; }
+  .hcard .hbody{ padding:14px; } .hcard .htag{ display:inline-block; font-size:11px; font-weight:700; color:var(--accent); margin-bottom:6px; }
+  .hcard .htitle{ font-size:15px; font-weight:700; } .hcard .hdesc{ font-size:12.5px; color:var(--sub); margin-top:6px; line-height:1.5; }
+
+  /* 지정기부 CTA */
+  .dpromo{ padding:30px 28px; background:var(--dark); color:#fff; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+  .dpromo h3{ font-size:22px; font-weight:800; } .dpromo p{ font-size:14px; color:#c7ccd3; margin-top:6px; }
+  .dpromo .bar{ width:280px; } .dpromo .track{ height:10px; background:#4b515b; border-radius:5px; overflow:hidden; } .dpromo .fill{ height:100%; width:68%; background:#fff; }
+  .dpromo .pct{ font-size:12px; color:#c7ccd3; margin-top:6px; } .dpromo .btn{ background:#fff; color:var(--ink); padding:13px 24px; border-radius:8px; font-weight:700; font-size:15px; white-space:nowrap; }
+
+  /* 콘텐츠/소식 카드 */
+  .ccard{ border:1px solid var(--line); border-radius:10px; overflow:hidden; }
+  .ccard .cimg{ height:160px; background:var(--img); display:flex; align-items:center; justify-content:center; color:#fff; font-size:30px; }
+  .ccard .cbody{ padding:12px 14px; } .ccard .ctitle{ font-size:14px; font-weight:600; } .ccard .cmeta{ font-size:12px; color:var(--sub); margin-top:4px; }
+  .ctype{ display:inline-block; font-size:10.5px; font-weight:700; border-radius:4px; padding:1px 7px; margin-bottom:6px; }
+  .ctype.vid{ background:#2b2f36; color:#fff; } .ctype.mag{ background:#eef0f3; color:#555; border:1px solid var(--line); } .ctype.post{ background:#eceef1; color:#4d535b; border:1px solid #c4c8ce; }
+
+  /* 답례품 후기 (생생) */
+  .reviews{ padding:34px 28px; border-bottom:1px solid var(--line); }
+  .rv-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+  .rvcard{ border:1px solid var(--line); border-radius:12px; overflow:hidden; background:#fff; box-shadow:0 2px 10px rgba(0,0,0,.04); }
+  .rvcard .rimg{ height:160px; background:var(--img); position:relative; display:flex; align-items:center; justify-content:center; color:#9aa0a8; font-size:12px; }
+  .rvcard .rimg .stars{ position:absolute; left:10px; bottom:10px; background:rgba(0,0,0,.55); color:#fff; font-size:12px; padding:3px 9px; border-radius:14px; letter-spacing:1px; }
+  .rvcard .rbody{ padding:13px 15px; }
+  .rvcard .rquote{ font-size:13.5px; font-weight:600; line-height:1.5; color:#333; }
+  .rvcard .rmeta{ font-size:11.5px; color:var(--sub); margin-top:8px; } .rvcard .rprod{ font-size:11.5px; color:var(--accent); font-weight:700; margin-top:3px; }
+
+  /* 필터 */
+  .filter{ padding:20px 28px; border-bottom:1px solid var(--line); background:#fff; }
+  .filter .chips{ display:flex; gap:8px; flex-wrap:wrap; }
+  .chip{ border:1px solid var(--line); border-radius:20px; padding:7px 16px; font-size:13.5px; color:#555; background:#fff; font-weight:600; }
+  .chip.on{ background:var(--ink); color:#fff; border-color:var(--ink); }
+  .filter .row2{ display:flex; align-items:center; margin-top:14px; }
+  .filter .cnt{ font-size:13px; color:var(--sub); } .filter .cnt b{ color:var(--ink); }
+  .filter .sort{ margin-left:auto; display:flex; gap:14px; font-size:13px; color:#555; } .filter .sort .on{ color:var(--ink); font-weight:800; }
+
+  /* 푸터 */
+  .footer{ padding:28px 28px; background:#23272d; color:#aeb4bd; font-size:12.5px; }
+  .footer .ftop{ display:flex; gap:16px; flex-wrap:wrap; padding-bottom:14px; border-bottom:1px solid #3a3f47; margin-bottom:16px; font-weight:600; color:#cdd2d9; } .footer .ftop b{ color:#fff; }
+  .footer .cols{ display:flex; justify-content:space-between; gap:24px; align-items:flex-start; }
+  .footer .logo2{ font-size:17px; font-weight:800; color:#e9ecf0; margin-bottom:10px; }
+  .footer .info{ line-height:1.85; } .footer .info .cpr{ color:#7f858e; display:block; margin-top:8px; }
+  .footer .cs{ text-align:right; white-space:nowrap; } .footer .cs .csnum{ font-size:18px; font-weight:800; color:#fff; } .footer .cs .hours{ color:#aeb4bd; margin-top:4px; }
+  .footer .badges{ display:flex; gap:8px; margin-top:12px; justify-content:flex-end; }
+  .footer .badges .bg{ width:48px; height:32px; background:#343a42; border:1px solid #3f454e; border-radius:4px; display:flex; align-items:center; justify-content:center; text-align:center; font-size:8.5px; line-height:1.2; color:#aeb4bd; }
+  .float{ position:absolute; right:18px; bottom:18px; background:var(--accent); color:#fff; padding:12px 18px; border-radius:30px; font-size:13px; font-weight:700; box-shadow:0 6px 18px rgba(0,0,0,.3); z-index:6; }
+
+  /* ===== RT-04 답례품 상세 ===== */
+  .pageblock.p-detail{ background:#eceaf1; } /* 답례품 상세 = 옅은 라벤더 */
+  .crumb{ display:flex; align-items:center; gap:8px; padding:14px 28px; border-bottom:1px solid var(--line); font-size:13px; color:var(--sub); }
+  .crumb .gov{ margin-left:auto; background:#eef0f3; border:1px solid var(--line); border-radius:14px; padding:3px 12px; font-size:12px; color:#2f6db0; font-weight:700; }
+  .detail{ display:flex; gap:30px; padding:30px 28px; border-bottom:1px solid var(--line); }
+  .gallery{ flex:none; width:430px; }
+  .gallery .main{ width:430px; height:430px; background:var(--img); border-radius:12px; display:flex; align-items:center; justify-content:center; color:#9aa0a8; font-size:13px; }
+  .gallery .thumbs{ display:flex; gap:8px; margin-top:10px; }
+  .gallery .thumbs .t{ width:66px; height:66px; background:var(--img); border:1px solid var(--line); border-radius:8px; }
+  .gallery .thumbs .t.on{ border-color:var(--accent); border-width:2px; }
+  .buy{ flex:1; display:flex; flex-direction:column; gap:12px; }
+  .buy .prov{ font-size:13px; color:var(--sub); }
+  .buy .pt{ font-size:25px; font-weight:800; line-height:1.35; }
+  .buy .giftbadge{ align-self:flex-start; background:#eceef1; color:#4d535b; border:1px solid #c4c8ce; border-radius:6px; padding:4px 11px; font-size:14px; font-weight:700; }
+  .buy .meta2{ display:flex; gap:14px; font-size:13px; color:var(--sub); align-items:center; flex-wrap:wrap; }
+  .buy .meta2 .free{ color:#2f6db0; font-weight:700; } .buy .meta2 .star b{ color:var(--star); }
+  .infolist{ border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:14px 0; display:flex; flex-direction:column; gap:10px; font-size:13.5px; }
+  .infolist .r{ display:flex; gap:12px; } .infolist .k{ width:84px; color:var(--sub); flex:none; } .infolist .v{ color:var(--ink); flex:1; } .infolist .v.tax{ line-height:1.7; }
+  .optsel{ border:1px solid var(--line); border-radius:8px; padding:13px 14px; font-size:14px; color:#555; display:flex; justify-content:space-between; align-items:center; }
+  .totalrow{ display:flex; justify-content:space-between; align-items:baseline; }
+  .totalrow .tl{ font-size:14px; color:var(--sub); } .totalrow .tv{ font-size:24px; font-weight:800; }
+  .donate{ background:var(--accent); color:#fff; text-align:center; padding:16px; border-radius:10px; font-size:17px; font-weight:800; }
+  .tabs{ display:flex; padding:0 28px; border-bottom:2px solid #e1e4e8; }
+  .tabs .tb{ padding:15px 20px; font-size:14.5px; font-weight:700; color:#9aa0a8; border-bottom:2px solid transparent; margin-bottom:-2px; }
+  .tabs .tb.on{ color:var(--ink); border-bottom-color:var(--accent); }
+  .tabbody{ padding:28px; border-bottom:1px solid var(--line); }
+  .ditmg{ height:460px; background:var(--img); border-radius:10px; display:flex; align-items:center; justify-content:center; color:#9aa0a8; font-size:13px; margin-bottom:14px; }
+  .notice{ font-size:13px; color:var(--sub); line-height:1.7; }
+  .qna .qrow{ display:flex; gap:12px; padding:12px 0; border-top:1px solid var(--line); font-size:13.5px; } .qna .qrow .st{ color:var(--accent); font-weight:700; white-space:nowrap; }
+  .linkbtn{ display:inline-block; margin-top:10px; font-size:13px; color:#2f6db0; font-weight:700; border:1px solid #b9cee0; border-radius:8px; padding:8px 14px; }
+
+  /* ===== 진입 팝업 (dim 오버레이) ===== */
+  .popwrap{ position:relative; width:1280px; min-height:460px; border:1px solid var(--line); border-radius:12px; overflow:hidden; background:#dfe2e6; box-shadow:0 6px 24px rgba(0,0,0,.08); }
+  .popwrap .dim{ position:absolute; inset:0; background:rgba(20,22,28,.62); display:flex; align-items:center; justify-content:center; }
+  .popwrap .dimnote{ position:absolute; top:14px; left:16px; color:#cfd3da; font-size:12px; z-index:2; }
+  .popup{ width:420px; background:#fff; border-radius:16px; overflow:hidden; position:relative; box-shadow:0 20px 60px rgba(0,0,0,.45); }
+  .popup .x{ position:absolute; top:10px; right:14px; color:#fff; font-size:18px; z-index:2; text-shadow:0 1px 4px rgba(0,0,0,.5); }
+  .popup .pim{ height:380px; background:var(--img2); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; color:#fff; text-align:center; padding:20px; }
+  .popup .pim .anim{ font-size:30px; } .popup .pim .lbl{ font-size:13.5px; opacity:.95; line-height:1.5; }
+  .popup .pbar{ display:flex; align-items:center; justify-content:space-between; padding:13px 16px; font-size:13px; color:#555; border-top:1px solid var(--line); }
+  .popup .pbar .today{ color:#888; }
+
+  /* ===== 개발 상태 트래커 (화면별 플래그) ===== */
+  .statusflag{ width:100%; max-width:1280px; background:#1c2530; color:#cdd6df; border:1px solid #2f3b49; border-radius:10px; padding:11px 16px; font-size:12px; display:flex; flex-wrap:wrap; gap:8px 20px; align-items:center; }
+  .statusflag .ft{ font-weight:800; color:#fff; background:#4d535b; border-radius:5px; padding:2px 9px; font-size:11px; }
+  .statusflag .it{ display:flex; gap:6px; align-items:center; } .statusflag .it b{ color:#fff; } .statusflag .it .who{ color:#8b94a0; }
+  .statusflag .st{ border-radius:4px; padding:1px 8px; font-size:11px; font-weight:700; }
+  .statusflag .st.done{ background:#2e7d4f; color:#fff; } .statusflag .st.prog{ background:#4d535b; color:#fff; } .statusflag .st.wait{ background:#3a4452; color:#cdd6df; }
+
+  /* ===== SG 지정기부 ===== */
+  .pageblock.p-fund{ background:#e8efe9; }
+  .sgfeat{ display:flex; gap:24px; border:2px solid var(--accent); border-radius:14px; overflow:hidden; background:#fff; }
+  .sgfeat .fimg{ flex:none; width:420px; min-height:280px; background:var(--img); display:flex; align-items:center; justify-content:center; color:#9aa0a8; font-size:13px; }
+  .sgfeat .fbody{ flex:1; padding:24px 24px 24px 4px; display:flex; flex-direction:column; gap:12px; justify-content:center; }
+  .sgfeat .ftag{ align-self:flex-start; background:var(--accent); color:#fff; border-radius:6px; padding:3px 11px; font-size:12.5px; font-weight:700; }
+  .sgfeat .fttl{ font-size:24px; font-weight:800; line-height:1.35; }
+  .sgfeat .fdesc{ font-size:14px; color:var(--sub); line-height:1.6; }
+  .sgfeat .track{ height:9px; background:#e3e7ea; border-radius:5px; overflow:hidden; } .sgfeat .track > i{ display:block; height:100%; background:var(--accent); }
+  .sgfeat .fmeta{ display:flex; justify-content:space-between; align-items:baseline; font-size:13px; color:var(--sub); } .sgfeat .fmeta .fpct{ font-size:20px; font-weight:800; color:var(--accent); }
+  .sgfeat .fbtn{ align-self:flex-start; background:var(--accent); color:#fff; border-radius:8px; padding:12px 28px; font-weight:700; font-size:15px; }
+  .sggrid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .sgcard{ border:1px solid var(--line); border-radius:10px; overflow:hidden; background:#fff; }
+  .sgcard .cimg{ height:170px; background:var(--img); display:flex; align-items:center; justify-content:center; color:#9aa0a8; font-size:12px; }
+  .sgcard .cb{ padding:13px 15px; }
+  .sgcard .rg{ font-size:12px; color:var(--sub); display:flex; justify-content:space-between; } .sgcard .rg .dday{ color:var(--accent); font-weight:700; }
+  .sgcard .nm{ font-size:14.5px; font-weight:700; margin:6px 0 10px; line-height:1.4; }
+  .sgcard .track{ height:7px; background:#eceef1; border-radius:5px; overflow:hidden; } .sgcard .track > i{ display:block; height:100%; background:var(--accent); }
+  .sgcard .am{ display:flex; justify-content:space-between; align-items:baseline; margin-top:8px; font-size:13px; color:var(--sub); } .sgcard .am .pct{ font-weight:800; color:var(--accent); }
+
+  /* ===== GU 고향사랑안내 ===== */
+  .pageblock.p-guide{ background:#eaeff3; }
+  .guhero{ background:linear-gradient(135deg,#2b3a2f,#3a4a3e); color:#fff; padding:44px 32px; text-align:center; }
+  .guhero h1{ font-size:30px; font-weight:800; line-height:1.4; } .guhero p{ font-size:15px; color:#dfe6e0; margin-top:12px; }
+  .gu3{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .guc{ border:1px solid var(--line); border-radius:10px; padding:22px; text-align:center; background:#fff; } .guc .ic{ font-size:30px; } .guc .t{ font-size:15px; font-weight:800; margin:8px 0 4px; } .guc .d{ font-size:12.5px; color:var(--sub); line-height:1.55; }
+  .benefit2{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .bcard{ border:1px solid var(--line); border-radius:10px; padding:20px; background:#fff; } .bcard h3{ font-size:16px; font-weight:800; margin-bottom:12px; }
+  .taxtab{ width:100%; border-collapse:collapse; font-size:13px; } .taxtab th,.taxtab td{ border:1px solid var(--line); padding:8px 10px; text-align:left; } .taxtab th{ background:#f5f6f8; }
+  .steps{ display:flex; gap:12px; flex-wrap:wrap; } .step{ flex:1; min-width:150px; border:1px solid var(--line); border-radius:10px; padding:18px; background:#fff; } .step .no{ width:28px; height:28px; border-radius:50%; background:var(--accent); color:#fff; font-weight:800; display:flex; align-items:center; justify-content:center; font-size:14px; } .step .st2{ font-size:14px; font-weight:700; margin:10px 0 4px; } .step .sd{ font-size:12px; color:var(--sub); line-height:1.5; }
+  .gcalc{ display:flex; gap:20px; flex-wrap:wrap; align-items:stretch; } .gcalc .in{ flex:1; min-width:240px; border:1px solid var(--line); border-radius:10px; padding:18px; background:#fff; } .gcalc .in input{ width:100%; border:1px solid var(--line); border-radius:8px; padding:11px 12px; font-size:16px; } .gcalc .res{ flex:1; min-width:240px; background:#f4f5f7; border:1px solid var(--line); border-radius:10px; padding:18px; } .gcalc .res .row{ display:flex; justify-content:space-between; font-size:14px; padding:6px 0; } .gcalc .res .tot{ border-top:1px solid var(--line); margin-top:6px; padding-top:10px; font-size:18px; font-weight:800; }
+  .faq .q{ border:1px solid var(--line); border-radius:10px; padding:14px 16px; margin-bottom:8px; background:#fff; font-size:14px; font-weight:600; display:flex; justify-content:space-between; } .faq .q .ar{ color:var(--sub); }
+
+  /* 고향사랑안내 상단 프로모션 이미지 (금액·혜택 강조) */
+  .guphoto{ position:relative; min-height:300px; background:linear-gradient(135deg,#c9543b,#a8412e); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; color:#fff; text-align:center; padding:44px 24px; }
+  .guphoto .tag{ position:absolute; top:12px; right:16px; font-size:11px; color:#fff; opacity:.55; }
+  .guphoto .big{ font-size:36px; font-weight:800; line-height:1.3; text-shadow:0 2px 10px rgba(0,0,0,.3); }
+  .guphoto .sub{ font-size:16px; opacity:.97; text-shadow:0 1px 8px rgba(0,0,0,.25); }
+  .guphoto .chips{ display:flex; gap:10px; margin-top:6px; flex-wrap:wrap; justify-content:center; } .guphoto .chips span{ background:rgba(255,255,255,.94); color:var(--ink); border-radius:16px; padding:6px 14px; font-size:13px; font-weight:700; }
+
+  /* ===== EV 이벤트 ===== */
+  .pageblock.p-event{ background:#f2ece6; }
+  .evhero{ min-height:230px; background:var(--img2); border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; color:#fff; text-align:center; position:relative; padding:30px; }
+  .evhero .tag{ position:absolute; top:12px; right:16px; font-size:11px; opacity:.6; }
+  .evhero .badge2{ background:#e74c3c; color:#fff; font-size:12px; font-weight:700; padding:3px 12px; border-radius:14px; }
+  .evhero .t{ font-size:26px; font-weight:800; text-shadow:0 1px 8px rgba(0,0,0,.3); } .evhero .d{ font-size:14px; opacity:.95; }
+  .evgrid{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+  .evcard{ border:1px solid var(--line); border-radius:10px; overflow:hidden; background:#fff; }
+  .evcard .eimg{ height:160px; background:var(--img); display:flex; align-items:center; justify-content:center; color:#9aa0a8; font-size:12px; position:relative; }
+  .evcard .estat{ position:absolute; top:10px; left:10px; font-size:11px; font-weight:700; border-radius:4px; padding:2px 8px; } .evcard .estat.on{ background:#2e7d4f; color:#fff; } .evcard .estat.soon{ background:#4d535b; color:#fff; } .evcard .estat.end{ background:#9aa0a8; color:#fff; }
+  .evcard .eb{ padding:13px 15px; } .evcard .et{ font-size:14.5px; font-weight:700; } .evcard .ed{ font-size:12.5px; color:var(--sub); margin-top:5px; }
+  /* 고향사랑안내 상단 프로모션 이미지 슬롯 (컨테이너 폭·약 560px) */
+  .guimg{ margin:18px 28px; height:560px; background:repeating-linear-gradient(45deg,#cfd2d7,#cfd2d7 14px,#c4c7cd 14px,#c4c7cd 28px); border:1px dashed var(--line); border-radius:12px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; color:#5e636b; text-align:center; padding:24px; }
+  .guimg .t{ font-size:16px; font-weight:800; } .guimg .d{ font-size:13px; max-width:580px; line-height:1.6; }
+
+  /* ===== LO 로그인 / 인증 ===== */
+  .pageblock.p-auth{ background:#eef0f3; }
+  .authpage{ display:flex; justify-content:center; padding:48px 28px; min-height:520px; background:#fff; }
+  .authcard{ width:400px; max-width:100%; }
+  .authcard h2{ font-size:24px; font-weight:800; text-align:center; margin-bottom:6px; } .authcard .lead{ text-align:center; color:var(--sub); font-size:13.5px; margin-bottom:26px; }
+  .authcard .field{ margin-bottom:12px; } .authcard label{ font-size:13px; color:var(--sub); display:block; margin-bottom:6px; } .authcard input{ width:100%; border:1px solid var(--line); border-radius:8px; padding:13px 14px; font-size:15px; }
+  .authcard .loginbtn{ width:100%; background:var(--accent); color:#fff; border-radius:8px; padding:15px; font-weight:800; font-size:16px; text-align:center; margin-top:10px; }
+  .authcard .links{ display:flex; justify-content:center; gap:14px; font-size:13px; color:var(--sub); margin:16px 0; }
+  .authcard .divider{ text-align:center; color:#aab; font-size:12px; margin:18px 0; border-top:1px solid var(--line); line-height:0.1; } .authcard .divider span{ background:#fff; padding:0 12px; }
+  .authcard .social{ display:flex; flex-direction:column; gap:10px; } .authcard .social a{ border:1px solid var(--line); border-radius:8px; padding:13px; text-align:center; font-weight:700; font-size:14px; }
+  .authcard .social a.pass{ background:#3a4ad8; color:#fff; border-color:#3a4ad8; }
+  .authcard .joinbtn{ width:100%; border:1.5px solid var(--accent); color:var(--accent); background:#fff; border-radius:8px; padding:14px; font-weight:800; font-size:15px; text-align:center; margin-top:10px; } .authcard .joinbtn small{ display:block; font-weight:600; font-size:11.5px; color:#9aa0a8; margin-top:2px; }
+  .authcard .fhint{ font-size:11px; color:#9aa0a8; margin-top:5px; line-height:1.45; } .authcard .joinflow{ display:flex; justify-content:center; flex-wrap:wrap; gap:7px; font-size:12.5px; color:var(--sub); margin-bottom:16px; } .authcard .joinflow b{ color:var(--accent); } .authcard input[readonly]{ background:#f5f6f8; color:#555; } .authcard .grouplbl{ font-size:12px; font-weight:800; color:#7a8089; margin:18px 0 8px; letter-spacing:.3px; }
+
+  /* ===== MO 햄버거 메뉴 (드로어) ===== */
+  .hamwrap{ position:relative; width:390px; min-height:580px; border:1px solid var(--line); border-radius:14px; overflow:hidden; background:#dfe2e6; }
+  .hamwrap .hamdim{ position:absolute; inset:0; background:rgba(20,22,28,.5); }
+  .hamdrawer{ position:absolute; top:0; left:0; bottom:0; width:300px; background:#fff; box-shadow:4px 0 20px rgba(0,0,0,.2); display:flex; flex-direction:column; }
+  .hamdrawer .top{ display:flex; align-items:center; justify-content:space-between; padding:16px; border-bottom:1px solid var(--line); } .hamdrawer .top .logo{ font-weight:800; font-size:16px; } .hamdrawer .top .logo span{ color:var(--sub); font-weight:600; font-size:13px; }
+  .hamdrawer .auth{ padding:14px 16px; display:flex; gap:8px; } .hamdrawer .auth a{ flex:1; text-align:center; border:1px solid var(--line); border-radius:8px; padding:11px; font-weight:700; font-size:13px; } .hamdrawer .auth a.primary{ background:var(--ink); color:#fff; border-color:var(--ink); }
+  .hammenu{ overflow:auto; } .hammenu .mi{ padding:14px 18px; font-size:15px; font-weight:600; border-top:1px solid #f0f1f3; display:flex; justify-content:space-between; } .hammenu .mi.sub{ font-size:13px; color:var(--sub); font-weight:500; padding:10px 18px 12px; } .hammenu .sec2{ padding:12px 18px 2px; font-size:11px; color:#9aa0a8; font-weight:700; background:#f7f8fa; }
+
+  /* ===== 주문약관동의 팝업 / PA 주문결제 / 기부완료 ===== */
+  .pageblock.p-pay{ background:#eceef1; }
+  .agreewrap{ position:relative; width:1280px; min-height:520px; border:1px solid var(--line); border-radius:12px; overflow:hidden; background:#dfe2e6; }
+  .agreewrap .dim{ position:absolute; inset:0; background:rgba(20,22,28,.55); display:flex; align-items:center; justify-content:center; }
+  .agreebox{ width:460px; background:#fff; border-radius:14px; overflow:hidden; box-shadow:0 16px 50px rgba(0,0,0,.4); }
+  .agreebox .ah{ padding:18px 20px; border-bottom:1px solid var(--line); font-size:17px; font-weight:800; display:flex; justify-content:space-between; }
+  .agreebox .all{ padding:14px 20px; background:#f5f6f8; font-size:15px; font-weight:700; display:flex; align-items:center; gap:10px; }
+  .agreebox .item{ padding:12px 20px; font-size:13.5px; display:flex; align-items:center; gap:10px; border-top:1px solid #f0f1f3; } .agreebox .item .req{ color:#4d535b; font-weight:700; font-size:11.5px; }
+  .chk{ width:20px; height:20px; border:1.5px solid var(--accent); border-radius:5px; flex:none; display:flex; align-items:center; justify-content:center; color:#fff; font-size:13px; background:var(--accent); }
+  .chk.off{ background:#fff; color:#fff; border-color:#cfd4da; }
+  .agreebox .go{ margin:16px 20px 20px; background:var(--accent); color:#fff; border-radius:8px; padding:14px; text-align:center; font-weight:800; font-size:15px; }
+  .pa{ padding:44px 44px 36px; display:flex; flex-direction:column; gap:24px; max-width:820px; margin:0 auto; }
+  .pa.two{ max-width:1140px; display:grid; grid-template-columns:1.55fr 1fr; gap:26px; align-items:start; } .pa.two .pacol{ display:flex; flex-direction:column; gap:20px; min-width:0; } .pa.two .pacol.side .pasec.limit{ position:relative; } .pa.two .donate{ margin-top:2px; }
+  .pasec{ border:1px solid var(--line); border-radius:10px; padding:22px 24px; } .pasec h3{ font-size:15px; font-weight:800; margin-bottom:16px; display:flex; align-items:center; }
+  .reqtag{ background:#eceef1; color:#4d535b; font-size:11px; font-weight:700; padding:2px 9px; border-radius:10px; margin-left:9px; }
+  .pasec.limit{ border:1.5px solid var(--accent); background:#eef0f2; } .limitcta{ display:flex; align-items:center; gap:18px; flex-wrap:wrap; } .limitcta .lt{ flex:1; min-width:220px; font-size:14px; line-height:1.55; } .limitcta .btn{ background:var(--accent); color:#fff; border-radius:9px; padding:16px 28px; font-weight:800; font-size:15.5px; white-space:nowrap; box-shadow:0 4px 12px rgba(0,0,0,.18); } .limitcta .done-chk{ color:#2e7d4f; font-weight:800; }
+  .parow{ display:flex; align-items:center; gap:12px; font-size:13.5px; padding:7px 0; } .parow .k{ width:96px; color:var(--sub); flex:none; } .parow .v{ flex:1; min-width:0; }
+  .pafield{ display:block; width:100%; border:1px solid var(--line); border-radius:8px; padding:11px 13px; font-size:13.5px; color:#555; }
+  .payselect{ display:flex; gap:10px; flex-wrap:wrap; } .payselect .p{ border:1px solid var(--line); border-radius:8px; padding:10px 16px; font-size:13.5px; } .payselect .p.on{ border-color:var(--accent); color:var(--accent); font-weight:700; }
+  .limitbox{ background:#f4f5f7; border:1px solid var(--line); border-radius:8px; padding:14px; font-size:13px; display:flex; gap:10px; align-items:center; }
+  .paytotal{ display:flex; justify-content:space-between; align-items:baseline; padding-top:10px; border-top:1px solid var(--line); margin-top:6px; } .paytotal .tv{ font-size:22px; font-weight:800; }
+  .done{ padding:50px 28px; text-align:center; background:#fff; } .done .ck{ width:64px; height:64px; border-radius:50%; background:#2e7d4f; color:#fff; font-size:32px; display:flex; align-items:center; justify-content:center; margin:0 auto 18px; } .done h2{ font-size:24px; font-weight:800; } .done .msg{ color:var(--sub); font-size:14px; margin-top:10px; line-height:1.6; }
+  .done .cheerbox{ max-width:520px; margin:24px auto 0; border:1px solid var(--line); border-radius:10px; padding:16px; text-align:left; } .done .cheerbox label{ font-size:13px; font-weight:700; } .done .cheerbox input{ width:100%; border:1px solid var(--line); border-radius:8px; padding:11px; margin-top:8px; font-size:14px; }
+  .done .acts{ display:flex; gap:10px; justify-content:center; margin-top:24px; } .done .acts a{ border:1px solid var(--line); border-radius:8px; padding:13px 24px; font-weight:700; font-size:14px; } .done .acts a.primary{ background:var(--accent); color:#fff; border-color:var(--accent); }
+  /* 회원가입 약관 동의 (LO-02) */
+  .joinagree .item{ padding:11px 0; font-size:13.5px; display:flex; align-items:center; gap:10px; border-top:1px solid #f0f1f3; } .joinagree .item .req{ color:#4d535b; font-weight:700; font-size:11.5px; } .joinagree .item .sel{ color:#9aa0a8; font-size:11.5px; }
+
+  /* ===== MY 마이페이지 ===== */
+  .pageblock.p-my{ background:#eef0ee; }
+  .myhead{ display:flex; align-items:center; gap:20px; padding:24px 28px; border-bottom:1px solid var(--line); background:#f4f5f7; flex-wrap:wrap; }
+  .myhead .nm{ font-size:20px; font-weight:800; } .myhead .give{ font-size:13px; color:var(--sub); margin-top:4px; } .myhead .give b{ color:var(--accent); font-size:17px; }
+  .myhead .counts{ margin-left:auto; display:flex; gap:10px; flex-wrap:wrap; } .myhead .counts .c{ text-align:center; border:1px solid var(--line); border-radius:10px; padding:12px 14px; background:#fff; min-width:80px; } .myhead .counts .c .n{ font-size:18px; font-weight:800; color:var(--accent); } .myhead .counts .c .l{ font-size:11.5px; color:var(--sub); margin-top:3px; }
+  .mymenu{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .mygrp{ border:1px solid var(--line); border-radius:10px; overflow:hidden; } .mygrp .gh{ background:#f5f6f8; padding:11px 16px; font-size:13px; font-weight:800; } .mygrp a{ display:flex; justify-content:space-between; padding:13px 16px; font-size:14px; border-top:1px solid #f0f1f3; color:var(--ink); }
+  .myorder{ border:1px solid var(--line); border-radius:10px; padding:16px; display:flex; gap:14px; align-items:center; flex-wrap:wrap; } .myorder .im{ width:80px; height:80px; background:var(--img); border-radius:8px; flex:none; display:flex; align-items:center; justify-content:center; color:#9aa0a8; font-size:10px; } .myorder .oi{ flex:1; min-width:160px; font-size:13.5px; } .myorder .ostat{ display:inline-block; background:#eef3f8; color:#2f6db0; border-radius:5px; padding:2px 9px; font-size:11.5px; font-weight:700; margin-bottom:5px; } .myorder .obtn{ border:1px solid var(--accent); color:var(--accent); border-radius:8px; padding:9px 16px; font-weight:700; font-size:13px; }
+  .ostep{ display:flex; gap:6px; margin-top:8px; } .ostep .s{ flex:1; text-align:center; font-size:11.5px; color:var(--sub); } .ostep .s .d{ width:11px; height:11px; border-radius:50%; background:#cfd4da; margin:0 auto 6px; } .ostep .s.on .d{ background:var(--accent); } .ostep .s.on{ color:var(--ink); font-weight:700; }
+  .recvbox{ width:420px; background:#fff; border-radius:14px; overflow:hidden; box-shadow:0 16px 50px rgba(0,0,0,.4); padding:26px; text-align:center; } .recvbox h3{ font-size:18px; font-weight:800; } .recvbox p{ font-size:13px; color:var(--sub); line-height:1.6; margin-top:10px; } .recvbox .acts{ display:flex; gap:10px; margin-top:20px; } .recvbox .acts a{ flex:1; border:1px solid var(--line); border-radius:8px; padding:13px; font-weight:700; font-size:14px; } .recvbox .acts a.primary{ background:var(--accent); color:#fff; border-color:var(--accent); }
+
+  /* ===== MY 서브화면 (목록·탭·폼) ===== */
+  .mylist .lrow{ display:flex; gap:14px; align-items:center; padding:15px 16px; border:1px solid var(--line); border-radius:10px; margin-bottom:10px; }
+  .mylist .lrow .dt{ font-size:12px; color:var(--sub); } .mylist .lrow .ti{ font-size:14px; font-weight:700; margin-top:3px; } .mylist .lrow .sub2{ font-size:12px; color:var(--sub); margin-top:3px; }
+  .mylist .lrow .rt{ margin-left:auto; text-align:right; } .mylist .lrow .amt{ font-size:15px; font-weight:800; } .mylist .lrow .stt{ display:inline-block; font-size:11.5px; font-weight:700; color:#2f6db0; background:#eef3f8; border-radius:5px; padding:2px 8px; margin-bottom:4px; } .mylist .lrow .lk{ font-size:12px; color:var(--accent); font-weight:700; border:1px solid #c4c8ce; border-radius:6px; padding:6px 11px; display:inline-block; }
+  .subtab{ display:flex; border-bottom:2px solid #e1e4e8; margin-bottom:18px; } .subtab .t{ padding:12px 18px; font-size:14px; font-weight:700; color:#9aa0a8; border-bottom:2px solid transparent; margin-bottom:-2px; } .subtab .t.on{ color:var(--ink); border-bottom-color:var(--accent); }
+  .emptybox{ text-align:center; padding:44px 20px; color:var(--sub); font-size:13.5px; border:1px dashed var(--line); border-radius:10px; }
+  .mylist .lrow .rim{ width:46px; height:46px; flex:0 0 46px; background:#dfe3e8; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:10px; color:#8a9099; }
+  /* 기부 유형 뱃지 (일반/지정) */
+  .gbadge{ display:inline-block; font-size:10.5px; font-weight:700; padding:1.5px 7px; border-radius:4px; margin-right:6px; vertical-align:middle; } .gbadge.gen{ background:#eaf1fb; color:#2f6db0; } .gbadge.des{ background:#eceef1; color:#4d535b; }
+  /* 답례품 배송상태 안내 인포그래픽 (마이페이지 하단) */
+  .shipguide{ display:flex; gap:0; }
+  .shipguide .sg{ flex:1; text-align:center; padding:0 14px; position:relative; }
+  .shipguide .sg:not(:last-child)::after{ content:'→'; position:absolute; right:-9px; top:9px; color:#b9bec5; font-size:18px; }
+  .shipguide .sg .ic{ width:38px; height:38px; border-radius:50%; background:#eef0f3; border:1.5px solid var(--line); display:flex; align-items:center; justify-content:center; margin:0 auto 11px; font-weight:800; color:var(--accent); }
+  .shipguide .sg .nm{ font-size:13.5px; font-weight:800; margin-bottom:6px; } .shipguide .sg .de{ font-size:11.5px; color:var(--sub); line-height:1.5; }
+  /* 검색결과(SR)·전체카테고리(CA)·알럿/토스트(공통) */
+  .srbar{ display:flex; gap:10px; max-width:800px; margin:0 auto 20px; } .srbar input{ flex:1; border:1.5px solid var(--ink); border-radius:10px; padding:15px 18px; font-size:15px; } .srbar .go{ background:var(--ink); color:#fff; border-radius:10px; padding:0 30px; font-weight:800; display:flex; align-items:center; font-size:15px; }
+  .catgrid{ display:grid; grid-template-columns:repeat(4,1fr); gap:14px; } .catcard{ border:1px solid var(--line); border-radius:10px; padding:16px 18px; } .catcard .ci{ width:42px; height:42px; border-radius:10px; background:#eef0f3; margin-bottom:11px; display:flex; align-items:center; justify-content:center; color:#9aa0a8; font-size:18px; } .catcard .cn{ font-weight:800; font-size:14.5px; margin-bottom:7px; } .catcard .cs{ font-size:12px; color:var(--sub); line-height:1.7; }
+  .uirow{ display:flex; gap:22px; flex-wrap:wrap; justify-content:center; align-items:flex-start; } .uibox{ width:300px; background:#fff; border-radius:14px; box-shadow:0 12px 40px rgba(0,0,0,.22); overflow:hidden; border:1px solid var(--line); } .uibox .ub-h{ padding:18px 20px 8px; font-size:16px; font-weight:800; } .uibox .ub-b{ padding:0 20px 16px; font-size:13px; color:var(--sub); line-height:1.6; } .uibox .ub-f{ display:flex; border-top:1px solid var(--line); } .uibox .ub-f a{ flex:1; text-align:center; padding:14px; font-weight:700; font-size:14px; color:#555; } .uibox .ub-f a.primary{ background:var(--accent); color:#fff; } .uibox .ub-f a+a{ border-left:1px solid var(--line); }
+  .uitoast{ display:inline-flex; align-items:center; gap:8px; background:#2b2f36; color:#fff; border-radius:24px; padding:13px 24px; font-size:13.5px; font-weight:600; } .uicap{ text-align:center; font-size:12px; color:var(--sub); margin-top:10px; }
+  .lpf{ width:100%; border:1px solid var(--line); border-radius:8px; padding:13px 14px; font-size:15px; margin-bottom:10px; } .lpresult{ background:#eef0f2; border:1px solid var(--line); border-radius:10px; padding:16px; text-align:left; font-size:13.5px; line-height:1.7; margin-top:6px; } .lpresult .ok{ color:#2e7d4f; font-weight:800; }
+  /* batch2: 작성폼·배송지·공지·약관·상세 */
+  .fta{ width:100%; border:1px solid var(--line); border-radius:8px; padding:12px 14px; font-size:14px; min-height:120px; resize:vertical; font-family:inherit; }
+  .starpick{ font-size:26px; color:#cfd4da; letter-spacing:5px; } .starpick .on{ color:var(--star); }
+  .filebox{ border:1.5px dashed var(--line); border-radius:8px; padding:20px; text-align:center; color:var(--sub); font-size:13px; }
+  .addrlist .arow{ border:1px solid var(--line); border-radius:10px; padding:16px 18px; margin-bottom:10px; } .arow .top{ display:flex; align-items:center; gap:8px; margin-bottom:6px; } .arow .deftag{ background:#eef0f3; color:#555; border:1px solid var(--line); font-size:11px; font-weight:700; padding:2px 8px; border-radius:5px; } .arow .nm{ font-weight:800; font-size:14.5px; } .arow .ad{ font-size:13px; color:#555; line-height:1.6; } .arow .acts{ display:flex; gap:8px; margin-top:12px; } .arow .acts a{ border:1px solid var(--line); border-radius:7px; padding:7px 14px; font-size:12.5px; font-weight:700; color:#555; } .addaddr{ border:1.5px dashed var(--line); border-radius:10px; padding:16px; text-align:center; font-weight:700; color:var(--accent); }
+  .noticelist .nrow{ display:flex; gap:16px; padding:16px 6px; border-bottom:1px solid var(--line); font-size:14px; align-items:center; } .noticelist .nrow:first-child{ border-top:1px solid var(--line); } .nrow .ncat{ font-size:11.5px; font-weight:700; color:var(--accent); border:1px solid #c4c8ce; border-radius:5px; padding:2px 9px; flex:none; } .nrow .nt{ flex:1; font-weight:600; } .nrow .nd{ color:var(--sub); font-size:12.5px; flex:none; }
+  .termsbody{ border:1px solid var(--line); border-radius:10px; padding:22px 24px; font-size:12.5px; color:#555; line-height:1.9; max-height:560px; overflow:auto; } .termsbody h4{ font-size:13.5px; color:var(--ink); font-weight:800; margin:16px 0 6px; } .termstab{ display:flex; gap:8px; margin-bottom:16px; } .termstab span{ border:1px solid var(--line); border-radius:20px; padding:8px 18px; font-size:13px; font-weight:700; color:#555; } .termstab span.on{ background:var(--ink); color:#fff; border-color:var(--ink); }
+  .odetail{ display:grid; grid-template-columns:1.4fr 1fr; gap:24px; align-items:start; }
+  /* 날짜검색 필터 (기부내역·주문/배송조회) */
+  .datefilter{ display:flex; align-items:center; gap:9px; flex-wrap:wrap; background:#f4f5f7; border:1px solid var(--line); border-radius:10px; padding:12px 14px; margin-bottom:16px; font-size:13px; }
+  .datefilter .seg{ display:flex; border:1px solid var(--line); border-radius:7px; overflow:hidden; } .datefilter .seg span{ padding:7px 13px; background:#fff; border-right:1px solid var(--line); cursor:pointer; } .datefilter .seg span:last-child{ border-right:0; } .datefilter .seg span.on{ background:var(--accent); color:#fff; font-weight:700; }
+  .datefilter .dates{ display:flex; align-items:center; gap:6px; color:var(--sub); } .datefilter .dates .d{ border:1px solid var(--line); border-radius:7px; padding:7px 11px; background:#fff; min-width:120px; } .datefilter .qbtn{ margin-left:auto; background:var(--ink); color:#fff; border-radius:7px; padding:8px 18px; font-weight:700; }
+  /* 서브화면 상하 여백 보강(답답함 완화) — 컨텐츠 영역 패딩↑, 빈 상태는 중앙정렬 */
+  .p-my .block{ padding:46px 32px 56px; } .p-my .emptybox{ min-height:300px; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+  /* 로그인 상태 헤더 (마이=프로필 아이콘 + 로그아웃) */
+  .hd .prof{ font-size:21px; color:#555; cursor:pointer; } .hd .login.lo{ background:#fff; color:#555; border:1px solid var(--line); font-weight:600; }
+  .authnote{ display:block; border:1px solid #cfe0cf; background:#f1f8f1; border-radius:8px; padding:11px; text-align:center; font-size:13px; color:#2e7d4f; font-weight:600; }
+</style>
+</head>
+<body>
+
+<!-- =================================================================== -->
+<!-- PAGE 6 · EV-01 기부사업 (PC) — 구 '이벤트' 전면개편 (천원시리즈)        -->
+<!-- =================================================================== -->
+<div class="pageblock p-event">
+  <div class="inner">
+    <div class="plabel"><span class="id">EV-01</span> 광주 서구 기부사업 <small>PC · 구 '이벤트'→'기부사업' 전면개편 · 천원시리즈 스토리텔링 · 이미지=회색</small></div>
+    <div class="statusflag">
+      <span class="ft">개발 상태</span>
+      <span class="it">기획 <span class="st prog">개편중</span> <b>2026-06-27</b> <span class="who">(출처: 기부사업 전면개편 기획안·김희선 주무관·6/29 협의예정)</span></span>
+      <span class="it">디자인 <span class="st wait">대기</span> <span class="who">공석환 과장</span></span>
+      <span class="it">퍼블리싱 <span class="st wait">대기</span> <span class="who">P3</span></span>
+      <span class="it">기능 매핑 <span class="st wait">대기</span> <span class="who">BO 콘텐츠 등록모델 신설 필요</span></span>
+    </div>
+    <div class="device">
+      <div class="sec"><div class="dot">1</div>
+        <div class="hd"><div class="logo">고향온 <span>| 광주 서구</span></div>
+          <div class="nav"><span>광주 서구 이야기</span><span>답례품</span><span class="on">기부사업</span><span>고향사랑안내</span></div>
+          <div class="sp"></div><div class="icons"><span>🔍</span><span>▦</span><span class="login">로그인</span></div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">2</div>
+        <div class="evhero" style="min-height:260px;"><span class="tag">기부사업 히어로 이미지 (천원의 행복 · 따뜻한 톤)</span>
+          <div class="t">광주 서구의 기부금은, 이렇게 쓰입니다</div>
+          <div class="d">청장 역점 ‘천원 시리즈’ — 당신의 기부가 천원의 행복으로 돌아갑니다</div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">3</div>
+        <div class="block"><div class="head"><h2>지금까지의 변화</h2><span class="s">함께 만든 천원의 행복</span></div>
+          <div class="stats">
+            <div class="stat"><div class="num smp">1,240명<sup>샘플</sup></div><div class="lbl">누적 기부자</div></div>
+            <div class="stat"><div class="num smp">3.2억원<sup>샘플</sup></div><div class="lbl">누적 기부금</div></div>
+            <div class="stat"><div class="num smp">6개<sup>샘플</sup></div><div class="lbl">기부사업</div></div>
+            <div class="stat"><div class="num smp">1,800여명<sup>샘플</sup></div><div class="lbl">혜택 받은 이웃</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">4</div>
+        <div class="block"><div class="head"><h2>지금 함께할 수 있어요</h2><span class="s">🤝 지정기부 모금 (행정안전부 e음 연계)</span></div>
+          <div class="emptybox" style="min-height:150px;display:flex;flex-direction:column;align-items:center;justify-content:center;">현재 진행 중인 지정기부 모금이 없습니다.<br><span class="smp">광주 서구의 지정기부 사업은 준비되는 대로 이곳에서 바로 참여하실 수 있습니다.</span></div>
+          <div class="note" style="margin-top:12px;">🔻 <b>등록 시 이렇게 노출</b> — 현재 <b>e음 API 0건</b>이라 위 빈 상태가 실제 화면. 천원세탁·기저귀가 e음에 등록되면 아래처럼 모금 카드로:</div>
+          <div class="sggrid" style="margin-top:10px;opacity:.65;">
+            <div class="sgcard"><div class="cimg">천원세탁 이미지</div><div class="cb"><div class="rg"><span>광주 서구 · 지정기부</span><span class="dday smp">D-60<sup>샘플</sup></span></div><div class="nm">천원세탁 모금</div><div class="track"><i style="width:40%"></i></div><div class="am"><span class="pct smp">40%<sup>샘플</sup></span><span style="color:#2f6db0;font-weight:700;">기부하기 →</span></div></div></div>
+            <div class="sgcard"><div class="cimg">기저귀 지원 이미지</div><div class="cb"><div class="rg"><span>광주 서구 · 지정기부</span><span class="dday smp">모금 8월~<sup>샘플</sup></span></div><div class="nm">천사(1000사) 기저귀 지원 모금</div><div class="track"><i style="width:0%"></i></div><div class="am"><span class="pct">모금 예정</span><span style="color:#2f6db0;font-weight:700;">기부하기 →</span></div></div></div>
+          </div>
+          <div class="note" style="border-left:3px solid var(--accent);"><b>🔗 IA 결정(2026-06-27 · 일원화)</b>: 지정기부를 <b>별도 탭/페이지 없이 기부사업 페이지 안의 섹션</b>으로 통합(GNB 지정기부 탭 제거). 사유 = <b>현재 광주서구 지정기부 e음 API가 0건</b>이라 별도 페이지는 텅 빔 → 한 페이지로 묶어 아래 ‘이야기 섹션’이 채우게. 이 모금 섹션 = <b>e음 API 출력</b>(우리 BO 수정 불가), 카드 클릭 시 모금 상세(SG-02·[기부하기]). 천원세탁·기저귀는 <b>e음 등록 후 이 섹션에 모금 카드로 노출</b>, 등록 전엔 아래 ‘진행 중 기부사업’ 이야기로만 존재.</div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">5</div>
+        <div class="block"><div class="head"><h2>지금 진행 중인 기부사업</h2><span class="s">🟢 기부금이 이렇게 쓰이고 있어요 (천원시리즈)</span></div>
+          <div class="evgrid" style="grid-template-columns:repeat(3,1fr);">
+            <div class="evcard"><div class="eimg">천원국시 매장 사진<span class="estat on">진행중</span></div><div class="eb"><div class="et">천원국시</div><div class="ed">우리밀 국수 한 그릇 1,000원 · 어르신 일자리 · <b>7·8·10호점이 고향사랑기부금으로 개소</b></div><div class="ed" style="color:var(--accent);font-weight:700;margin-top:6px;">▶ 영상 3편 · 자세히 보기 ›</div></div></div>
+            <div class="evcard"><div class="eimg">천원택시 사진<span class="estat on">진행중</span></div><div class="eb"><div class="et">천원택시</div><div class="ed">거동 불편 어르신 병원길 교통비 — 본인부담 1,000원 · <b>고향사랑기부금 3억원 편성(전년比 10배)</b></div><div class="ed" style="color:var(--accent);font-weight:700;margin-top:6px;">자세히 보기 ›</div></div></div>
+            <div class="evcard"><div class="eimg">천원세탁 사진<span class="estat on">진행중</span></div><div class="eb"><div class="et">천원세탁 <span class="gbadge des">지정기부</span></div><div class="ed">거동 불편 장애인 세탁 서비스 월 5만원 한도 · <span class="smp">450명<sup>샘플</sup></span> · 2026 대상 확대</div><div class="ed" style="color:var(--accent);font-weight:700;margin-top:6px;">자세히 보기 · <span style="color:#2f6db0;">위 ‘지금 모금 중’에서 기부 ›</span></div></div></div>
+          </div>
+          <div class="note">💡 <b>이야기 섹션(BO 콘텐츠)</b> — 집행형(국시·택시)은 자체 성과 표시(달성률 없음), 지정기부형(세탁·기저귀)은 여기서 <b>소개</b> + 위 ‘지금 모금 중’ 섹션의 모금으로 연결. 메인 MA-01 ⑦ 카드와 동일 데이터(teaser→상세 EV-02).</div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">6</div>
+        <div class="block"><div class="head"><h2>곧 시작해요</h2><span class="s">🟡 준비 중인 기부사업</span></div>
+          <div class="evgrid" style="grid-template-columns:repeat(3,1fr);">
+            <div class="evcard" style="opacity:.82;"><div class="eimg">준비 중<span class="estat soon">곧 시작</span></div><div class="eb"><div class="et">천원돌봄</div><div class="ed">중증 어르신 돌봄 월 15시간 · <span class="smp">100명<sup>샘플</sup></span> · 2026.8~</div></div></div>
+            <div class="evcard" style="opacity:.82;"><div class="eimg">준비 중<span class="estat soon">곧 시작</span></div><div class="eb"><div class="et">천원중개보수 <span class="smp" style="font-size:10px;">*명칭변경예정<sup>샘플</sup></span></div><div class="ed">청년 1인가구 중개수수료 최대 30만원 · 2026.8~</div></div></div>
+            <div class="evcard" style="opacity:.82;"><div class="eimg">준비 중<span class="estat soon">곧 시작</span></div><div class="eb"><div class="et">천사(1000사) 기저귀 지원 <span class="gbadge des">지정기부</span></div><div class="ed">출산세대 30만원 기저귀 바우처 · <b>모금 8월~</b> / 사업 시작 모금완료 후</div></div></div>
+          </div>
+          <div class="note">⚠️ 기저귀 사업: 자료상 추진 2027이나 주무관 설명 <b>“8월 모금 시작·사업집행은 모금완료 후 내년”</b> → 카드에 ‘모금 시점’과 ‘사업 시점’ 분리 표기.</div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">7</div>
+        <div class="block"><div class="head"><h2>영상으로 보는 천원의 행복</h2><span class="s">천원국시 매장 이야기</span></div>
+          <div class="grid3">
+            <div class="ccard"><div class="cimg">▶</div><div class="cbody"><span class="ctype vid">영상</span><div class="ctitle">천원국시 7호점 개소 영상</div></div></div>
+            <div class="ccard"><div class="cimg">▶</div><div class="cbody"><span class="ctype vid">영상</span><div class="ctitle">천원국시 관련 뉴스</div></div></div>
+            <div class="ccard"><div class="cimg">▶</div><div class="cbody"><span class="ctype vid">영상</span><div class="ctitle">천원국시 10호점 개소 영상</div></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">8</div>
+        <div class="dpromo"><div><h3>당신의 기부가 다음 천원의 행복을 만듭니다</h3><p>답례품으로 기부하거나, 위 ‘지금 모금 중’ 지정기부에 직접 함께해주세요</p></div>
+          <div class="btn">답례품 보러가기</div></div>
+      </div>
+      <div class="sec"><div class="dot">9</div>
+        <div class="footer"><div class="ftop"><b>개인정보처리방침</b><span>이용약관</span><span>공지사항</span><span>나의 답례품 문의</span></div>
+          <div class="cols"><div class="info"><div class="logo2">ⓔ 제너두</div>서울특별시 강남구 강남대로 556 16층 (논현동, 이두데이빌딩)<br>대표자: 송동진 &nbsp;|&nbsp; 사업자등록번호: 104-81-56237 &nbsp;|&nbsp; 통신판매신고번호: 제 강남-12684호<span class="cpr">COPYRIGHT ⓒ 이제너두(주) ALL RIGHTS RESERVED.</span></div>
+          <div class="cs"><div class="csnum">고객센터 1899-0522</div><div class="hours">평일 09:00-18:00 · 토·일·공휴일 휴무</div><div class="badges"><div class="bg">ISMS</div><div class="bg">개인정보<br>보호</div><div class="bg">Global<br>Sign</div><div class="bg">행정<br>안전부</div><div class="bg">디지털<br>서비스</div></div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="desc-col"><div class="desc"><h3>Description — EV-01 기부사업 (PC)</h3>
+      <table class="d">
+        <tr><th class="n">#</th><th class="area">영역</th><th>설명 · 배치 의도</th></tr>
+        <tr><td class="n">1</td><td class="area">헤더</td><td><span class="badge b-fix">확정</span>GNB <b>‘이벤트’→‘기부사업’</b> + <b>‘지정기부’ 탭 제거</b>(일원화 결정 2026-06-27). 라우트 <code>/event/eventList</code> 재활용 또는 신규.</td></tr>
+        <tr><td class="n">2</td><td class="area">페이지 히어로</td><td><span class="badge b-fix">확정 카피</span>천원시리즈 스토리텔링 도입부(웰로 대비 차별 콘텐츠 — 6/10 미팅 요구⑤·본부장 요청). 공 과장 톤.</td></tr>
+        <tr><td class="n">3</td><td class="area">성과 카운터</td><td><span class="badge b-bo">BO</span>‘규모’를 숫자로 전달(누적 기부자·기부금·사업·수혜). <b>실수치 소스 확정 필요(6/29)</b>.</td></tr>
+        <tr><td class="n">4</td><td class="area">★지금 모금 중 (지정기부)</td><td><span class="badge b-fix">확정</span><b>e음 API 출력 섹션</b>(우리 BO 수정 불가). <b>현재 광주서구 지정기부 0건 → 빈 상태가 실화면</b>(아래는 등록 시 예시). 카드 클릭→모금 상세(SG-02·[기부하기]). 천원세탁·기저귀 e음 등록 시 노출. <b>지정기부를 별도 페이지 대신 이 섹션으로 일원화한 핵심 영역.</b></td></tr>
+        <tr><td class="n">5</td><td class="area">진행 중 기부사업 (이야기)</td><td><span class="badge b-fix">확정</span><b>BO 콘텐츠·천원시리즈 한정</b>(김희선 주무관·2026-06-27). 집행형(국시·택시)=성과/지정기부형(세탁·기저귀)=소개+위 모금섹션 연결. 메인 ⑦과 동일 데이터.</td></tr>
+        <tr><td class="n">6</td><td class="area">곧 시작</td><td><span class="badge b-open">협의</span>예정 사업 노출로 ‘적은 아이템’ 보강(6/29 노출 OK 확인). 기저귀=모금/사업 시점 분리.</td></tr>
+        <tr><td class="n">7</td><td class="area">영상·이야기</td><td><span class="badge b-bo">BO</span>천원국시 유튜브 3편(7호점·뉴스·10호점). 메인 소식 섹션과 자산 공유.</td></tr>
+        <tr><td class="n">8</td><td class="area">하단 유도</td><td><span class="badge b-fix">확정</span>답례품·지정기부(위 모금섹션)로 행동 전환.</td></tr>
+        <tr><td class="n">9</td><td class="area">푸터</td><td><span class="badge b-fix">확정</span>메인과 동일.</td></tr>
+      </table>
+      <div class="note" style="margin-top:10px;">📌 <b>일원화 구조</b>(2026-06-27 결정): 지정기부 별도 탭 없이 기부사업 1페이지 = [모금 섹션 e음] + [이야기 섹션 BO]. 사유=지정기부 API 0건이라 별도 페이지 텅 빔. 근거 [[20260627] 기부사업 vs 지정기부 IA] · 기획안 [20260627_1730]. 6/29 협의 후 확정.</div>
+    </div></div>
+  </div>
+</div>
+
+<!-- =================================================================== -->
+<!-- PAGE 6b · EV-02 기부사업 상세 (PC) — 천원국시 예시 (상세페이지 레퍼런스) -->
+<!-- =================================================================== -->
+<div class="pageblock p-event">
+  <div class="inner">
+    <div class="plabel"><span class="id">EV-02</span> 기부사업 상세 (천원국시) <small>PC · 신규 · 광주 서구청 천원국시 실데이터 반영(개요·가격·운영시간·10호점) · 레이아웃=노인복지 상세 차용</small></div>
+    <div class="device">
+      <div class="sec"><div class="dot">1</div>
+        <div class="hd"><div class="logo">고향온 <span>| 광주 서구</span></div>
+          <div class="nav"><span>광주 서구 이야기</span><span>답례품</span><span class="on">기부사업</span><span>고향사랑안내</span></div>
+          <div class="sp"></div><div class="icons"><span>🔍</span><span>▦</span><span class="login">로그인</span></div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">2</div>
+        <div class="crumb">기부사업 <span>›</span> 천원국시 <span class="gov">🟢 진행중</span></div>
+      </div>
+      <div class="sec"><div class="dot">3</div>
+        <div class="evhero" style="min-height:220px;"><span class="tag">천원국시 대표 이미지 (현장 사진)</span>
+          <span class="estat on" style="position:static;">진행중</span>
+          <div class="t">천원국시 — 우리밀로 차린 천원의 한 끼</div>
+          <div class="d">서창 우리밀 국수를 착한 가격에 · 어르신 일자리와 나눔문화를 함께</div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">4</div>
+        <div class="block"><div class="head"><h2>사업 개요</h2></div>
+          <div class="infolist">
+            <div class="r"><div class="k">한 줄 정의</div><div class="v">서창 지역에서 생산된 <b>우리밀 국수</b>를 착한 가격에 판매하고, 이를 통해 <b>노인일자리 창출과 나눔문화 확산</b>에 힘쓰는 지역 상생형 사업</div></div>
+            <div class="r"><div class="k">메뉴 · 가격</div><div class="v">우리밀 국수 — <b>주대상 1,000원</b> / 그 외 3,000원 · 일 100그릇(재료 소진 시 조기 마감)</div></div>
+            <div class="r"><div class="k">운영시간</div><div class="v">월~금 11:00~14:00 (1호점 12:30~14:00) · 나눔냉장고 11:00~17:00</div></div>
+            <div class="r"><div class="k">운영 인력</div><div class="v">60세 이상 노인일자리 참여자 — 개소당 20명</div></div>
+            <div class="r"><div class="k">고향사랑기부금</div><div class="v"><b>천원국시 매장 중 7·8·10호점이 고향사랑기부금으로 개소</b></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">5</div>
+        <div class="block"><div class="head"><h2>사업 내용</h2></div>
+          <div class="notice">· 서창 지역에서 생산된 <b>우리밀 국수</b>를 착한 가격에 판매하는 지역 상생형 매장 확대<br>· <b>노인일자리 창출</b>로 건강하고 안정된 노후생활 보장(개소당 60세 이상 20명)<br>· 지역 생산 우리밀을 재료로 사용해 <b>우리밀 소비 촉진</b><br>· 시민이 부담 없이 이용하는 착한식당 운영 + <b>나눔냉장고</b> 운영(나눔문화 확산)<br>· 주대상 외 <b>임산부·7세 미만 영유아는 전 호점 대상</b> 포함</div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">6</div>
+        <div class="block"><div class="head"><h2>운영 현황</h2><span class="s">전체 10개 호점 운영 중 · 🎁 = 고향사랑기부금 개소</span></div>
+          <div class="grid3">
+            <div class="hcard"><div class="himg">7호점 현장 사진</div><div class="hbody"><span class="htag">🎁 7호점 · 화정1동</span><div class="htitle">천원국시 7호점</div><div class="hdesc">화운로175번길 5-7 · 2024.11.1 개소 <b>(고향사랑기부금)</b></div></div></div>
+            <div class="hcard"><div class="himg">8호점 현장 사진</div><div class="hbody"><span class="htag">🎁 8호점 · 농성1동</span><div class="htitle">천원국시 8호점</div><div class="hdesc">죽봉대로78번길 10 · 2025.1.9 개소 <b>(고향사랑기부금)</b></div></div></div>
+            <div class="hcard"><div class="himg">10호점 현장 사진</div><div class="hbody"><span class="htag">🎁 10호점 · 유덕동</span><div class="htitle">천원국시 10호점</div><div class="hdesc">칠성로 33 · 2025.6.18 개소 <b>(고향사랑기부금)</b></div></div></div>
+          </div>
+          <div class="note">📍 천원국시는 1호점(2023.3)부터 <b>현재 10호점까지 운영</b> 중이며, 그중 <b>7·8·10호점이 고향사랑기부금으로 문을 열었습니다.</b> 출처: 광주 서구청 천원국시 안내.</div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">7</div>
+        <div class="block"><div class="head"><h2>영상</h2></div>
+          <div class="grid3">
+            <div class="ccard"><div class="cimg">▶</div><div class="cbody"><span class="ctype vid">영상</span><div class="ctitle">7호점 홍보영상</div></div></div>
+            <div class="ccard"><div class="cimg">▶</div><div class="cbody"><span class="ctype vid">영상</span><div class="ctitle">관련 뉴스</div></div></div>
+            <div class="ccard"><div class="cimg">▶</div><div class="cbody"><span class="ctype vid">영상</span><div class="ctitle">10호점 홍보영상</div></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">8</div>
+        <div class="letter"><div class="txt"><div style="font-size:13px;color:var(--accent);font-weight:700;">성과 · 감사</div>
+          <div class="quote">“여러분의 기부로 매일 100그릇의 따뜻한 한 끼와<br>어르신 일자리가 동네에 자리잡았습니다.”</div>
+          <div class="sign smp">— 집행 금액·연 수혜 그릇 수(BO 등록)<sup>샘플</sup></div></div>
+          <div class="photo">현장 이미지 (개소식 · 어르신)</div></div>
+      </div>
+      <div class="sec"><div class="dot">9</div>
+        <div class="footer"><div class="ftop"><b>개인정보처리방침</b><span>이용약관</span><span>공지사항</span><span>나의 답례품 문의</span></div>
+          <div class="cols"><div class="info"><div class="logo2">ⓔ 제너두</div>대표자: 송동진 &nbsp;|&nbsp; 사업자등록번호: 104-81-56237<span class="cpr">COPYRIGHT ⓒ 이제너두(주) ALL RIGHTS RESERVED.</span></div>
+          <div class="cs"><div class="csnum">고객센터 1899-0522</div><div class="hours">평일 09:00-18:00</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="desc-col"><div class="desc"><h3>Description — EV-02 기부사업 상세 (PC)</h3>
+      <table class="d">
+        <tr><th class="n">#</th><th class="area">영역</th><th>설명</th></tr>
+        <tr><td class="n">3~8</td><td class="area">상세 구조</td><td><span class="badge b-fix">확정</span>광주 노인복지 천원국시 상세 레이아웃 차용: 히어로 → 개요 → 내용 → 운영현황(호점) → 영상 → 성과·감사. <span class="badge b-bo">BO</span> 콘텐츠 등록.</td></tr>
+        <tr><td class="n">—</td><td class="area">지정기부형</td><td><span class="badge b-open">분기</span>천원세탁·기저귀 등 <b>모금형</b>이면 하단에 <b>[이 사업에 기부하기]</b> = 지정기부 상세(SG-02) 연결.</td></tr>
+      </table>
+    </div></div>
+  </div>
+</div>
+
+<!-- =================================================================== -->
+<!-- PAGE 6b-2 · EV-02 기부사업 상세 (PC) — 천원택시 (집행형 · 모금CTA 없음) -->
+<!-- =================================================================== -->
+<div class="pageblock p-event">
+  <div class="inner">
+    <div class="plabel"><span class="id">EV-02</span> 기부사업 상세 (천원택시) <small>PC · 신규 · 광주 서구청 천원택시 실데이터 반영 · 집행형(모금 CTA 없음)</small></div>
+    <div class="device">
+      <div class="sec"><div class="dot">1</div>
+        <div class="hd"><div class="logo">고향온 <span>| 광주 서구</span></div>
+          <div class="nav"><span>광주 서구 이야기</span><span>답례품</span><span class="on">기부사업</span><span>고향사랑안내</span></div>
+          <div class="sp"></div><div class="icons"><span>🔍</span><span>▦</span><span class="login">로그인</span></div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">2</div>
+        <div class="crumb">기부사업 <span>›</span> 천원택시 <span class="gov">🟢 진행중</span></div>
+      </div>
+      <div class="sec"><div class="dot">3</div>
+        <div class="evhero" style="min-height:220px;"><span class="tag">천원택시 대표 이미지 (콜택시·어르신)</span>
+          <span class="estat on" style="position:static;">진행중</span>
+          <div class="t">천원택시 — 병원 가는 길, 단 1,000원</div>
+          <div class="d">거동이 불편한 어르신의 병원길을 고향사랑기부금으로 함께합니다</div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">4</div>
+        <div class="block"><div class="head"><h2>사업 개요</h2></div>
+          <div class="infolist">
+            <div class="r"><div class="k">한 줄 정의</div><div class="v">광주 서구가 <b>고향사랑기부제와 연계</b>해 추진하는 교통복지정책 — 거동이 불편한 어르신의 <b>병원 진료 교통비</b> 지원</div></div>
+            <div class="r"><div class="k">고향사랑기부금</div><div class="v"><b>기부금 3억원을 천원택시 지원사업비로 편성(전년 대비 10배 증가)</b></div></div>
+            <div class="r"><div class="k">이용자 부담</div><div class="v"><b>1,000원</b> — 서구 지원: 광주권 병원 최대 2만원 · 화순전남대학교병원 최대 3만원</div></div>
+            <div class="r"><div class="k">이용 방법</div><div class="v">서구와 협약한 <b>광주빛고을콜택시</b> 이용, 병원 방문 시 1,000원만 부담</div></div>
+            <div class="r"><div class="k">대상</div><div class="v">(기존) 중증질환자(의료급여 1종 산정특례자) → <b>(확대)</b> 노인장기요양 1~4등급·퇴원환자·치매검사 대상자 등 거동 불편 어르신</div></div>
+            <div class="r"><div class="k">도입</div><div class="v">2025. 6. ~ (대상 확대 운영 중)</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">5</div>
+        <div class="block"><div class="head"><h2>사업 내용</h2></div>
+          <div class="notice">· 거동이 불편한 어르신이 <b>병원 진료를 위해 택시를 이용할 때 교통비를 지원</b><br>· 이용자는 <b>단 1,000원</b>만 부담, 나머지는 고향사랑기부금 재원으로 지원<br>· 협약 콜택시(광주빛고을콜택시)로 안전하게 병원 왕복<br>· 대상을 중증질환자에서 장기요양·퇴원환자·치매검사 대상자까지 <b>확대</b></div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">6</div>
+        <div class="block"><div class="head"><h2>성과</h2><span class="s">전년(6월~12월) 운영 실적</span></div>
+          <div class="stats">
+            <div class="stat"><div class="num">3,000회+</div><div class="lbl">운행 횟수</div></div>
+            <div class="stat"><div class="num">319명</div><div class="lbl">이용 어르신</div></div>
+            <div class="stat"><div class="num">약 10회</div><div class="lbl">1인 평균 이용</div></div>
+            <div class="stat"><div class="num">3억원</div><div class="lbl">기부금 편성(↑10배)</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">7</div>
+        <div class="letter"><div class="txt"><div style="font-size:13px;color:var(--accent);font-weight:700;">성과 · 감사</div>
+          <div class="quote">“여러분의 기부로 어르신들이<br>걱정 없이 병원에 다녀오실 수 있게 되었습니다.”</div>
+          <div class="sign smp">— 누적 운행·이용 어르신 수(BO 등록)<sup>샘플</sup></div></div>
+          <div class="photo">현장 이미지 (콜택시 · 어르신)</div></div>
+      </div>
+      <div class="sec"><div class="dot">8</div>
+        <div class="dpromo"><div><h3>천원택시처럼, 당신의 기부가 일상이 됩니다</h3><p>답례품으로 기부하고 광주 서구의 천원 시리즈를 함께 만들어주세요</p></div>
+          <div class="btn">답례품 보러가기</div></div>
+      </div>
+      <div class="sec"><div class="dot">9</div>
+        <div class="footer"><div class="ftop"><b>개인정보처리방침</b><span>이용약관</span><span>공지사항</span><span>나의 답례품 문의</span></div>
+          <div class="cols"><div class="info"><div class="logo2">ⓔ 제너두</div>대표자: 송동진 &nbsp;|&nbsp; 사업자등록번호: 104-81-56237<span class="cpr">COPYRIGHT ⓒ 이제너두(주) ALL RIGHTS RESERVED.</span></div>
+          <div class="cs"><div class="csnum">고객센터 1899-0522</div><div class="hours">평일 09:00-18:00</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="desc-col"><div class="desc"><h3>Description — EV-02 기부사업 상세 (천원택시 · PC)</h3>
+      <table class="d">
+        <tr><th class="n">#</th><th class="area">영역</th><th>설명</th></tr>
+        <tr><td class="n">4·5</td><td class="area">개요·내용</td><td><span class="badge b-fix">확정</span>광주 서구청 천원택시 실데이터(기부금 3억·전년比 10배·1,000원·광주빛고을콜택시·대상 확대). 출처=seogu.gwangju.kr.</td></tr>
+        <tr><td class="n">6</td><td class="area">성과</td><td><span class="badge b-fix">확정</span>전년 6~12월 실적(운행 3,000회+·319명·1인 약 10회). <span class="badge b-bo">BO</span> 누적 수치는 갱신.</td></tr>
+        <tr><td class="n">8</td><td class="area">하단 유도</td><td><span class="badge b-fix">확정</span><b>집행형 = 모금 CTA 없음</b>. 답례품 기부로 유도(지정기부형 천원세탁·기저귀와 분기).</td></tr>
+      </table>
+    </div></div>
+  </div>
+</div>
+
+<!-- =================================================================== -->
+<!-- PAGE 6b-3 · EV-02 기부사업 상세 (PC) — 천원세탁 (지정기부형 · BO이야기+e음모금 연결) -->
+<!-- =================================================================== -->
+<div class="pageblock p-event">
+  <div class="inner">
+    <div class="plabel"><span class="id">EV-02</span> 기부사업 상세 (천원세탁) <small>PC · 신규 · 지정기부형 = BO 이야기(김희선 자료) + [기부하기]→e음 모금(SG-02)</small></div>
+    <div class="device">
+      <div class="sec"><div class="dot">1</div>
+        <div class="hd"><div class="logo">고향온 <span>| 광주 서구</span></div>
+          <div class="nav"><span>광주 서구 이야기</span><span>답례품</span><span class="on">기부사업</span><span>고향사랑안내</span></div>
+          <div class="sp"></div><div class="icons"><span>🔍</span><span>▦</span><span class="login">로그인</span></div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">2</div>
+        <div class="crumb">기부사업 <span>›</span> 천원세탁 <span class="gov">🟢 진행중 · 지정기부</span></div>
+      </div>
+      <div class="sec"><div class="dot">3</div>
+        <div class="evhero" style="min-height:210px;"><span class="tag">천원세탁 대표 이미지</span>
+          <span class="estat on" style="position:static;">진행중</span>
+          <div class="t">천원세탁 — 천원으로 누리는 깨끗한 일상</div>
+          <div class="d">거동이 불편한 장애인 이웃에게 세탁 서비스를</div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">4</div>
+        <div class="block"><div class="head"><h2>사업 개요</h2><span class="s">고향온 BO 콘텐츠(김희선 주무관 자료)</span></div>
+          <div class="infolist">
+            <div class="r"><div class="k">유형</div><div class="v"><b>지정기부</b>(모금형) · 거동 불편 장애인 세탁 지원</div></div>
+            <div class="r"><div class="k">추진근거</div><div class="v">「장애인복지법」 제35조</div></div>
+            <div class="r"><div class="k">대상</div><div class="v">신체적 제약으로 세탁이 어려운 활동지원 대상자 중 <b>거동 불편 장애인 450명</b></div></div>
+            <div class="r"><div class="k">내용</div><div class="v"><b>천원의 이용요금</b>으로 월 5만원 한도 내 세탁서비스 제공</div></div>
+            <div class="r"><div class="k">수행기관</div><div class="v">공모 선정</div></div>
+            <div class="r"><div class="k">기간</div><div class="v">2026. 1. ~ (대상 확대 진행 중)</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">5</div>
+        <div class="block"><div class="head"><h2>사업 내용</h2></div>
+          <div class="notice">· 신체적 제약으로 세탁이 어려운 <b>거동 불편 장애인</b>에게 세탁 서비스를 지원<br>· 이용자는 <b>1,000원</b>만 부담, 월 5만원 한도 내 세탁<br>· 수행기관은 공모로 선정하여 운영<br>· 2026년 대상을 확대하여 더 많은 이웃에게 제공</div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">6</div>
+        <div class="block" style="border:2px solid var(--accent);border-radius:12px;background:#eef0f2;"><div class="head"><h2>이 사업에 기부하기</h2><span class="s">🤝 지정기부 모금 (행정안전부 e음 연계)</span></div>
+          <div class="limitcta">
+            <div class="lt"><b>천원세탁은 지정기부 모금 사업입니다.</b><br>당신의 기부가 모여 더 많은 장애인 이웃의 깨끗한 일상을 만듭니다.<br><span class="smp">목표 50,000,000원 · 40% 달성<sup>샘플(e음 API)</sup></span> · <span style="color:#b5651d;">현재 광주서구 e음 미등록 → 등록 후 활성</span></div>
+            <div class="btn">이 사업에 기부하기 →</div>
+          </div>
+          <div class="note">🔗 <b>[기부하기] = 지정기부 모금 상세(SG-02)로 이동</b> — 모금 데이터(목표·달성률·결제)는 <b>e음 API</b>가 단일소스(우리 BO 수정 불가). <b>위 ‘사업 개요·내용’은 우리 BO 콘텐츠</b>(김희선 자료)라 e음 사업소개 이미지와 별개로 풍부하게 작성.</div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">7</div>
+        <div class="letter"><div class="txt"><div style="font-size:13px;color:var(--accent);font-weight:700;">성과 · 감사</div>
+          <div class="quote smp">“여러분의 기부로 더 많은 이웃이 깨끗한 옷과 이불을 누리게 되었습니다.”<sup>샘플</sup></div>
+          <div class="sign smp">— 지원 인원·수혜 규모(BO 등록)<sup>샘플</sup></div></div>
+          <div class="photo">현장 이미지</div></div>
+      </div>
+      <div class="sec"><div class="dot">8</div>
+        <div class="footer"><div class="ftop"><b>개인정보처리방침</b><span>이용약관</span><span>공지사항</span><span>나의 답례품 문의</span></div>
+          <div class="cols"><div class="info"><div class="logo2">ⓔ 제너두</div>대표자: 송동진 &nbsp;|&nbsp; 사업자등록번호: 104-81-56237<span class="cpr">COPYRIGHT ⓒ 이제너두(주) ALL RIGHTS RESERVED.</span></div>
+          <div class="cs"><div class="csnum">고객센터 1899-0522</div><div class="hours">평일 09:00-18:00</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="desc-col"><div class="desc"><h3>Description — EV-02 기부사업 상세 (천원세탁 · PC)</h3>
+      <table class="d">
+        <tr><th class="n">#</th><th class="area">영역</th><th>설명</th></tr>
+        <tr><td class="n">4·5</td><td class="area">개요·내용</td><td><span class="badge b-fix">확정</span><b>BO 콘텐츠</b>(김희선 자료): 장애인복지법§35·450명·천원/월5만원·공모선정. 우리가 작성·수정.</td></tr>
+        <tr><td class="n">6</td><td class="area">★이 사업에 기부하기</td><td><span class="badge b-fix">확정</span>지정기부형 핵심 — <b>[기부하기]→모금 상세(SG-02)</b>. 모금 데이터=<b>e음 API 단일소스</b>(우리 수정 불가). <b>현재 광주서구 e음 미등록→버튼 비활성</b>, 등록 후 활성(타이밍 디커플링).</td></tr>
+        <tr><td class="n">—</td><td class="area">e음 vs BO</td><td><span class="badge b-open">분석</span>지정기부 e음 상세의 ‘사업소개’=<b>지자체가 e음에 올린 이미지 1장</b>(ilovegohyang.go.kr). 우리 BO 이야기(텍스트)와 <b>형식·통제권 다름</b> → 동일시 말고 분리. 근거 [[20260627] e음 지정기부 API 실측.</td></tr>
+      </table>
+    </div></div>
+  </div>
+</div>
+
+<!-- =================================================================== -->
+<!-- PAGE 6b-4 · EV-02 통합형 기부사업 상세 (PC) — 천원세탁 (이야기+모금 일체 · B안) -->
+<!-- =================================================================== -->
+<div class="pageblock p-event">
+  <div class="inner">
+    <div class="plabel"><span class="id">EV-02</span> 기부사업 상세 <b style="color:#b5651d;">통합형(B안)</b> (천원세탁) <small>PC · 신규 · 이야기 + 모금 위젯 한 페이지(SG-02 흡수) · "같게" 원할 시 안</small></div>
+    <div class="statusflag"><span class="ft">개발 상태</span><span class="it">기획 <span class="st prog">비교안</span> <b>2026-06-27</b> <span class="who">(6/29 광주서구 택1)</span></span><span class="it">디자인 <span class="st wait">대기</span> <span class="who">공석환 과장</span></span><span class="it">퍼블 <span class="st wait">대기</span> <span class="who">P2</span></span><span class="it">기능 매핑 <span class="st wait">대기</span> <span class="who">e음 모금 임베드</span></span></div>
+    <div class="device">
+      <div class="sec"><div class="dot">1</div>
+        <div class="hd"><div class="logo">고향온 <span>| 광주 서구</span></div>
+          <div class="nav"><span>광주 서구 이야기</span><span>답례품</span><span class="on">기부사업</span><span>고향사랑안내</span></div>
+          <div class="sp"></div><div class="icons"><span>🔍</span><span>▦</span><span class="login">로그인</span></div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">2</div>
+        <div class="crumb">기부사업 <span>›</span> 천원세탁 <span class="gov">🟢 진행중 · 지정기부 모금</span></div>
+      </div>
+      <div class="sec"><div class="dot">3</div>
+        <div class="evhero" style="min-height:210px;"><span class="tag">천원세탁 대표 이미지</span>
+          <span class="estat on" style="position:static;">진행중</span>
+          <div class="t">천원세탁 — 천원으로 누리는 깨끗한 일상</div>
+          <div class="d">거동이 불편한 장애인 이웃에게 세탁 서비스를</div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">4</div>
+        <div class="block" style="border:2px solid var(--accent);border-radius:12px;background:#eef0f2;padding:18px 20px;"><div class="head"><h2>모금 현황</h2><span class="s">🤝 지정기부 · 행정안전부 고향사랑e음 연계 (실시간)</span></div>
+          <div class="track" style="margin:14px 0 8px;"><i style="width:40%"></i></div>
+          <div class="fmeta"><span><b class="fpct smp">40%</b> 달성 · <span class="smp">20,000,000원 / 목표 50,000,000원<sup>샘플·e음</sup></span></span><span class="smp">D-60 · 참여 <span class="smp">128명</span><sup>샘플</sup></span></div>
+          <div class="fbtn" style="margin-top:14px;">이 사업에 기부하기 →</div>
+          <div class="note">🔗 <b>[기부하기] → 약관동의 → 한도조회 → 결제(PA)</b> 직접 진입(<b>별도 모금 페이지 없음</b>). 모금 수치=e음 API 단일소스(우리 수정 불가). <b>이 페이지 하나에 이야기+모금 일체</b> — A안의 SG-02를 이 섹션이 흡수.</div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">5</div>
+        <div class="block"><div class="head"><h2>사업 개요</h2><span class="s">고향온 BO 콘텐츠(김희선 주무관 자료)</span></div>
+          <div class="infolist">
+            <div class="r"><div class="k">유형</div><div class="v"><b>지정기부</b>(모금형) · 거동 불편 장애인 세탁 지원</div></div>
+            <div class="r"><div class="k">추진근거</div><div class="v">「장애인복지법」 제35조</div></div>
+            <div class="r"><div class="k">대상</div><div class="v">신체적 제약으로 세탁이 어려운 활동지원 대상자 중 <b>거동 불편 장애인 450명</b></div></div>
+            <div class="r"><div class="k">내용</div><div class="v"><b>천원의 이용요금</b>으로 월 5만원 한도 내 세탁서비스 제공</div></div>
+            <div class="r"><div class="k">기간</div><div class="v">2026. 1. ~ (대상 확대 진행 중)</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">6</div>
+        <div class="block"><div class="head"><h2>사업 내용</h2></div>
+          <div class="notice">· 신체적 제약으로 세탁이 어려운 <b>거동 불편 장애인</b>에게 세탁 서비스를 지원<br>· 이용자는 <b>1,000원</b>만 부담, 월 5만원 한도 내 세탁<br>· 수행기관은 공모로 선정하여 운영<br>· 2026년 대상을 확대하여 더 많은 이웃에게 제공</div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">7</div>
+        <div class="block"><div class="head"><h2>기부내역 · 응원하기</h2><span class="s">e음/집계 데이터 · 이 페이지에 임베드</span></div>
+          <div class="qna">
+            <div class="qrow"><span class="st smp">2분 전<sup>샘플</sup></span><span class="smp">김○○ 님</span><span style="margin-left:auto;font-weight:700;" class="smp">100,000원<sup>샘플</sup></span></div>
+            <div class="qrow"><span class="st smp">1시간 전<sup>샘플</sup></span><span class="smp">익명</span><span style="margin-left:auto;font-weight:700;" class="smp">50,000원<sup>샘플</sup></span></div>
+          </div>
+          <div class="cheer" style="margin-top:12px;"><div class="ch-head">응원 한 마디 <span class="ch-note">✍ 기부완료 시 입력</span></div>
+            <div class="ch-item"><span class="bell">💬</span><span class="time smp">방금<sup>샘플</sup></span><span class="msg smp">“좋은 일에 보탬이 되길 바랍니다.”<sup>샘플</sup></span></div>
+          </div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">8</div>
+        <div class="footer"><div class="ftop"><b>개인정보처리방침</b><span>이용약관</span><span>공지사항</span><span>나의 답례품 문의</span></div>
+          <div class="cols"><div class="info"><div class="logo2">ⓔ 제너두</div>대표자: 송동진 &nbsp;|&nbsp; 사업자등록번호: 104-81-56237<span class="cpr">COPYRIGHT ⓒ 이제너두(주) ALL RIGHTS RESERVED.</span></div>
+          <div class="cs"><div class="csnum">고객센터 1899-0522</div><div class="hours">평일 09:00-18:00</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="desc-col"><div class="desc"><h3>Description — EV-02 통합형(B안) 천원세탁 (PC)</h3>
+      <table class="d">
+        <tr><th class="n">#</th><th class="area">영역</th><th>설명</th></tr>
+        <tr><td class="n">—</td><td class="area">★A안 vs B안</td><td><span class="badge b-open">택1</span><b>A 분리형</b>=이야기 상세→[기부하기]→모금 상세(SG-02), 2페이지 / <b>B 통합형(이 화면)</b>=이야기+모금 위젯+기부내역·응원 <b>한 페이지</b>. 광주서구청이 "지정기부 상세를 이야기처럼 풍부하게/같게" 원하면 <b>B안</b>. 6/29 택1.</td></tr>
+        <tr><td class="n">4</td><td class="area">모금 위젯(임베드)</td><td><span class="badge b-fix">확정</span>달성률·목표·D-day·참여·[기부하기]. <b>e음 API 단일소스</b>(표시만, 수정 불가). [기부하기]→약관→한도조회→결제 직접(SG-02 미경유).</td></tr>
+        <tr><td class="n">5·6</td><td class="area">개요·내용</td><td><span class="badge b-fix">확정</span><b>우리 BO 콘텐츠</b>(김희선 자료) — e음 사업소개 이미지에 의존 안 함(이미지는 숨김/보조).</td></tr>
+        <tr><td class="n">7</td><td class="area">기부내역·응원</td><td><span class="badge b-fix">확정</span>SG-02 탭을 이 페이지에 임베드. e음/집계.</td></tr>
+        <tr><td class="n">—</td><td class="area">집행형 호환</td><td><span class="badge b-open">기획</span>국시·택시(모금객체 없음)는 <b>같은 템플릿</b>에서 §4 모금 위젯만 빠짐(조건부 렌더). 근거 [[20260627] e음 지정기부 API 실측.</td></tr>
+      </table>
+    </div></div>
+  </div>
+</div>
+
+<!-- =================================================================== -->
+<!-- PAGE 6b-5 · EV-02 통합형 기부사업 상세 (PC) — 천원국시 (집행형 · B안 변형) -->
+<!-- =================================================================== -->
+<div class="pageblock p-event">
+  <div class="inner">
+    <div class="plabel"><span class="id">EV-02</span> 기부사업 상세 <b style="color:#b5651d;">통합형(B안)</b> (천원국시) <small>PC · 집행형 인스턴스 — 같은 통합 템플릿, §모금 위젯 자리에 '집행 성과' + 답례품 CTA</small></div>
+    <div class="statusflag"><span class="ft">개발 상태</span><span class="it">기획 <span class="st prog">비교안</span> <b>2026-06-27</b> <span class="who">(집행형 = 모금 위젯 조건부 제외 실증)</span></span><span class="it">디자인 <span class="st wait">대기</span> <span class="who">공석환 과장</span></span><span class="it">퍼블 <span class="st wait">대기</span> <span class="who">P2</span></span><span class="it">기능 매핑 <span class="st wait">대기</span> <span class="who">BO 콘텐츠</span></span></div>
+    <div class="device">
+      <div class="sec"><div class="dot">1</div>
+        <div class="hd"><div class="logo">고향온 <span>| 광주 서구</span></div>
+          <div class="nav"><span>광주 서구 이야기</span><span>답례품</span><span class="on">기부사업</span><span>고향사랑안내</span></div>
+          <div class="sp"></div><div class="icons"><span>🔍</span><span>▦</span><span class="login">로그인</span></div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">2</div>
+        <div class="crumb">기부사업 <span>›</span> 천원국시 <span class="gov">🟢 진행중 · 집행형</span></div>
+      </div>
+      <div class="sec"><div class="dot">3</div>
+        <div class="evhero" style="min-height:210px;"><span class="tag">천원국시 대표 이미지 (현장 사진)</span>
+          <span class="estat on" style="position:static;">진행중</span>
+          <div class="t">천원국시 — 우리밀로 차린 천원의 한 끼</div>
+          <div class="d">우리밀 국수 한 그릇 1,000원, 어르신 일자리까지</div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">4</div>
+        <div class="block" style="border:2px solid var(--accent);border-radius:12px;background:#eef0f2;padding:18px 20px;"><div class="head"><h2>집행 성과</h2><span class="s">📊 집행형 — e음 모금 객체 없음(달성률·기부하기 미노출)</span></div>
+          <div class="stats" style="margin:6px 0 4px;">
+            <div class="stat"><b class="smp">10호점</b><span>현재 운영 중</span></div>
+            <div class="stat"><b>3개점</b><span>고향사랑기부금 개소(7·8·10호)</span></div>
+            <div class="stat"><b>1,000원</b><span>우리밀 국수 한 그릇</span></div>
+          </div>
+          <div class="dpromo" style="margin-top:14px;"><div><h3>천원국시를 함께 이어가요</h3><p>답례품으로 기부하면 광주 서구의 천원 시리즈에 보탬이 됩니다</p></div><div class="btn">답례품 보러가기 →</div></div>
+          <div class="note">🔗 <b>집행형은 [기부하기]가 e음 모금이 아니라 답례품·일반기부로 유도</b>(자체완결 사업, 모금 객체 없음). <b>B 통합 템플릿은 동일</b> — §4만 모금 위젯(천원세탁) ↔ 집행 성과(천원국시)로 <b>조건부 분기</b>. 근거 [[20260627] e음 지정기부 API 실측.</div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">5</div>
+        <div class="block"><div class="head"><h2>사업 개요</h2><span class="s">고향온 BO 콘텐츠(광주 서구청 천원국시 안내)</span></div>
+          <div class="infolist">
+            <div class="r"><div class="k">유형</div><div class="v"><b>집행형</b> · 우리밀 국수 한 끼 1,000원 + 어르신 일자리</div></div>
+            <div class="r"><div class="k">가격</div><div class="v">한 그릇 <b>1,000원</b></div></div>
+            <div class="r"><div class="k">고향사랑기부금</div><div class="v"><b>매장 중 7·8·10호점이 고향사랑기부금으로 개소</b></div></div>
+            <div class="r"><div class="k">운영</div><div class="v">1호점(2023.3) ~ <b>현재 10호점 운영</b></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">6</div>
+        <div class="block"><div class="head"><h2>고향사랑기부금으로 연 매장</h2></div>
+          <div class="grid3">
+            <div class="hcard"><div class="himg">7호점 현장 사진</div><div class="hbody"><span class="htag">🎁 7호점 · 화정1동</span><div class="htitle">천원국시 7호점</div><div class="hdesc">화운로175번길 5-7 · 2024.11.1 개소 <b>(고향사랑기부금)</b></div></div></div>
+            <div class="hcard"><div class="himg">8호점 현장 사진</div><div class="hbody"><span class="htag">🎁 8호점 · 농성1동</span><div class="htitle">천원국시 8호점</div><div class="hdesc">죽봉대로78번길 10 · 2025.1.9 개소 <b>(고향사랑기부금)</b></div></div></div>
+            <div class="hcard"><div class="himg">10호점 현장 사진</div><div class="hbody"><span class="htag">🎁 10호점 · 유덕동</span><div class="htitle">천원국시 10호점</div><div class="hdesc">칠성로 33 · 2025.6.18 개소 <b>(고향사랑기부금)</b></div></div></div>
+          </div>
+          <div class="note">📍 1호점(2023.3)부터 <b>현재 10호점까지 운영</b> 중이며, 그중 <b>7·8·10호점이 고향사랑기부금으로 개소</b>. 출처: 광주 서구청 천원국시 안내.</div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">7</div>
+        <div class="block"><div class="head"><h2>영상으로 보는 천원국시</h2></div>
+          <div class="grid3">
+            <div class="ccard"><div class="cimg">▶</div><div class="cbody"><span class="ctype vid">영상</span><div class="ctitle">천원국시 7호점 개소 영상</div></div></div>
+            <div class="ccard"><div class="cimg">▶</div><div class="cbody"><span class="ctype vid">영상</span><div class="ctitle">천원국시 관련 뉴스</div></div></div>
+            <div class="ccard"><div class="cimg">▶</div><div class="cbody"><span class="ctype vid">영상</span><div class="ctitle">천원국시 10호점 개소 영상</div></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">8</div>
+        <div class="footer"><div class="ftop"><b>개인정보처리방침</b><span>이용약관</span><span>공지사항</span><span>나의 답례품 문의</span></div>
+          <div class="cols"><div class="info"><div class="logo2">ⓔ 제너두</div>대표자: 송동진 &nbsp;|&nbsp; 사업자등록번호: 104-81-56237<span class="cpr">COPYRIGHT ⓒ 이제너두(주) ALL RIGHTS RESERVED.</span></div>
+          <div class="cs"><div class="csnum">고객센터 1899-0522</div><div class="hours">평일 09:00-18:00</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="desc-col"><div class="desc"><h3>Description — EV-02 통합형(B안) 천원국시 (PC)</h3>
+      <table class="d">
+        <tr><th class="n">#</th><th class="area">영역</th><th>설명</th></tr>
+        <tr><td class="n">—</td><td class="area">★집행형 인스턴스</td><td><span class="badge b-open">템플릿</span><b>B 통합 템플릿 = 천원세탁(모금형)과 동일 구조</b>, §4만 분기: 모금 위젯(달성률·기부하기) ↔ <b>집행 성과 패널(달성률·기부하기 없음)</b>. 집행형=e음 모금 객체 없음.</td></tr>
+        <tr><td class="n">4</td><td class="area">집행 성과 + CTA</td><td><span class="badge b-fix">확정</span>10호점·3개점 기부금 개소·1,000원. CTA=<b>답례품/일반기부 유도</b>(e음 모금 아님). 수치 <span class="badge b-bo">BO</span> 등록(실통계 수령).</td></tr>
+        <tr><td class="n">5·6·7</td><td class="area">개요·매장·영상</td><td><span class="badge b-fix">확정</span>광주 서구청 천원국시 실데이터(7·8·10호점 기부금 개소·1~10호점·영상 3편). <span class="badge b-bo">BO</span> 콘텐츠.</td></tr>
+      </table>
+    </div></div>
+  </div>
+</div>
+
+<!-- =================================================================== -->
+<!-- PAGE 6b-6 · EV-02 통합형 기부사업 상세 (PC) — 천원택시 (집행형 · B안 변형) -->
+<!-- =================================================================== -->
+<div class="pageblock p-event">
+  <div class="inner">
+    <div class="plabel"><span class="id">EV-02</span> 기부사업 상세 <b style="color:#b5651d;">통합형(B안)</b> (천원택시) <small>PC · 집행형 인스턴스 — §모금 위젯 자리에 '집행 성과' + 답례품 CTA</small></div>
+    <div class="statusflag"><span class="ft">개발 상태</span><span class="it">기획 <span class="st prog">비교안</span> <b>2026-06-27</b> <span class="who">(집행형 = 모금 위젯 조건부 제외)</span></span><span class="it">디자인 <span class="st wait">대기</span> <span class="who">공석환 과장</span></span><span class="it">퍼블 <span class="st wait">대기</span> <span class="who">P2</span></span><span class="it">기능 매핑 <span class="st wait">대기</span> <span class="who">BO 콘텐츠</span></span></div>
+    <div class="device">
+      <div class="sec"><div class="dot">1</div>
+        <div class="hd"><div class="logo">고향온 <span>| 광주 서구</span></div>
+          <div class="nav"><span>광주 서구 이야기</span><span>답례품</span><span class="on">기부사업</span><span>고향사랑안내</span></div>
+          <div class="sp"></div><div class="icons"><span>🔍</span><span>▦</span><span class="login">로그인</span></div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">2</div>
+        <div class="crumb">기부사업 <span>›</span> 천원택시 <span class="gov">🟢 진행중 · 집행형</span></div>
+      </div>
+      <div class="sec"><div class="dot">3</div>
+        <div class="evhero" style="min-height:210px;"><span class="tag">천원택시 대표 이미지 (콜택시·어르신)</span>
+          <span class="estat on" style="position:static;">진행중</span>
+          <div class="t">천원택시 — 병원 가는 길, 단 1,000원</div>
+          <div class="d">거동이 불편한 이웃의 병원길에 교통비를</div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">4</div>
+        <div class="block" style="border:2px solid var(--accent);border-radius:12px;background:#eef0f2;padding:18px 20px;"><div class="head"><h2>집행 성과</h2><span class="s">📊 집행형 — e음 모금 객체 없음(달성률·기부하기 미노출)</span></div>
+          <div class="stats" style="margin:6px 0 4px;">
+            <div class="stat"><b>3억원</b><span>고향사랑기부금 편성(전년比 10배)</span></div>
+            <div class="stat"><b class="smp">319명</b><span>이용 대상</span></div>
+            <div class="stat"><b>1,000원</b><span>본인부담 교통비</span></div>
+          </div>
+          <div class="dpromo" style="margin-top:14px;"><div><h3>천원택시처럼, 당신의 기부가 일상이 됩니다</h3><p>답례품으로 기부하고 광주 서구의 천원 시리즈를 함께 만들어주세요</p></div><div class="btn">답례품 보러가기 →</div></div>
+          <div class="note">🔗 <b>집행형은 [기부하기]가 e음 모금이 아니라 답례품·일반기부로 유도</b>(자체완결 사업, 모금 객체 없음). <b>B 통합 템플릿은 동일</b> — §4만 모금 위젯(천원세탁) ↔ 집행 성과(천원택시·국시)로 <b>조건부 분기</b>. 근거 [[20260627] e음 지정기부 API 실측.</div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">5</div>
+        <div class="block"><div class="head"><h2>사업 개요</h2><span class="s">고향온 BO 콘텐츠(광주 서구청 천원택시 안내)</span></div>
+          <div class="infolist">
+            <div class="r"><div class="k">유형</div><div class="v"><b>집행형</b> · 거동 불편 이웃 병원길 교통비 지원</div></div>
+            <div class="r"><div class="k">본인부담</div><div class="v">1회 <b>1,000원</b> (나머지는 기부금으로 지원)</div></div>
+            <div class="r"><div class="k">고향사랑기부금</div><div class="v"><b>기부금 3억원을 천원택시 지원사업비로 편성(전년 대비 10배 증가)</b></div></div>
+            <div class="r"><div class="k">운영</div><div class="v">광주빛고을콜택시 연계 · 대상 확대 진행 중</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">6</div>
+        <div class="block"><div class="head"><h2>사업 내용</h2></div>
+          <div class="notice">· 거동이 불편한 이웃이 병원·관공서 등을 오갈 때 <b>광주빛고을콜택시</b>로 이동 지원<br>· 이용자는 <b>1회 1,000원</b>만 부담, 나머지는 고향사랑기부금으로 충당<br>· 2026년 <b>기부금 3억원 편성(전년比 10배)</b>으로 지원 규모 대폭 확대<br>· 이용 대상을 단계적으로 확대</div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">7</div>
+        <div class="letter"><div class="txt"><div style="font-size:13px;color:var(--accent);font-weight:700;">성과 · 감사</div>
+          <div class="quote smp">“천원택시 덕분에 병원 가는 길이 두렵지 않습니다.”<sup>샘플</sup></div>
+          <div class="sign smp">— 누적 이용 횟수·수혜 인원(BO 등록)<sup>샘플</sup></div></div>
+          <div class="photo">현장 이미지</div></div>
+      </div>
+      <div class="sec"><div class="dot">8</div>
+        <div class="footer"><div class="ftop"><b>개인정보처리방침</b><span>이용약관</span><span>공지사항</span><span>나의 답례품 문의</span></div>
+          <div class="cols"><div class="info"><div class="logo2">ⓔ 제너두</div>대표자: 송동진 &nbsp;|&nbsp; 사업자등록번호: 104-81-56237<span class="cpr">COPYRIGHT ⓒ 이제너두(주) ALL RIGHTS RESERVED.</span></div>
+          <div class="cs"><div class="csnum">고객센터 1899-0522</div><div class="hours">평일 09:00-18:00</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="desc-col"><div class="desc"><h3>Description — EV-02 통합형(B안) 천원택시 (PC)</h3>
+      <table class="d">
+        <tr><th class="n">#</th><th class="area">영역</th><th>설명</th></tr>
+        <tr><td class="n">—</td><td class="area">★집행형 인스턴스</td><td><span class="badge b-open">템플릿</span><b>B 통합 템플릿 = 천원세탁(모금형)과 동일 구조</b>, §4만 분기: 모금 위젯 ↔ <b>집행 성과 패널(달성률·기부하기 없음)</b>. 집행형=e음 모금 객체 없음.</td></tr>
+        <tr><td class="n">4</td><td class="area">집행 성과 + CTA</td><td><span class="badge b-fix">확정</span>기부금 3억원(전년比 10배)·1,000원 본인부담. CTA=<b>답례품/일반기부 유도</b>(e음 모금 아님). 수치 <span class="badge b-bo">BO</span> 등록.</td></tr>
+        <tr><td class="n">5·6</td><td class="area">개요·내용</td><td><span class="badge b-fix">확정</span>광주 서구청 천원택시 실데이터(기부금 3억·전년比 10배·1,000원·광주빛고을콜택시·대상 확대). 출처=seogu.gwangju.kr.</td></tr>
+      </table>
+    </div></div>
+  </div>
+</div>
+
+<!-- =================================================================== -->
+<!-- PAGE 6b-7 · EV-02 통합형 기부사업 상세 (PC) — 기저귀 (모금형·모금 미시작 · B안 변형) -->
+<!-- =================================================================== -->
+<div class="pageblock p-event">
+  <div class="inner">
+    <div class="plabel"><span class="id">EV-02</span> 기부사업 상세 <b style="color:#b5651d;">통합형(B안)</b> (기저귀) <small>PC · 모금형·모금 미시작 — 모금 위젯 '예정/비활성'(8월 시작) · 출시 타이밍 디커플링</small></div>
+    <div class="statusflag"><span class="ft">개발 상태</span><span class="it">기획 <span class="st prog">비교안</span> <b>2026-06-27</b> <span class="who">(모금 8월 예정·디커플링 실증)</span></span><span class="it">콘텐츠 <span class="st wait">미수령</span> <span class="who">김희선 자료 대기</span></span><span class="it">퍼블 <span class="st wait">대기</span> <span class="who">P2</span></span><span class="it">기능 매핑 <span class="st wait">대기</span> <span class="who">e음 등록(8월) 후 모금</span></span></div>
+    <div class="device">
+      <div class="sec"><div class="dot">1</div>
+        <div class="hd"><div class="logo">고향온 <span>| 광주 서구</span></div>
+          <div class="nav"><span>광주 서구 이야기</span><span>답례품</span><span class="on">기부사업</span><span>고향사랑안내</span></div>
+          <div class="sp"></div><div class="icons"><span>🔍</span><span>▦</span><span class="login">로그인</span></div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">2</div>
+        <div class="crumb">기부사업 <span>›</span> 기저귀 지원 <span class="gov" style="background:#9aa0a6;">🟡 모금 예정 · 지정기부</span></div>
+      </div>
+      <div class="sec"><div class="dot">3</div>
+        <div class="evhero" style="min-height:210px;"><span class="tag">기저귀 지원 대표 이미지</span>
+          <span class="estat soon" style="position:static;">곧 시작</span>
+          <div class="t smp">기저귀 지원 — 사업명 확정 전<sup>샘플</sup></div>
+          <div class="d smp">대상·내용은 김희선 주무관 자료 수령 후 확정<sup>샘플</sup></div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">4</div>
+        <div class="block" style="border:2px dashed var(--accent);border-radius:12px;background:#f4f5f6;padding:18px 20px;"><div class="head"><h2>모금 현황 <span style="font-size:12px;color:#9aa0a6;">(준비 중)</span></h2><span class="s">🟡 지정기부 모금 — 2026년 8월 시작 예정(e음 등록 후 활성)</span></div>
+          <div class="track" style="margin:14px 0 8px;opacity:.4;"><i style="width:0%"></i></div>
+          <div class="fmeta"><span style="color:#9aa0a6;">모금 시작 전 · 목표/달성률 미표시</span><span class="smp">D-DAY 미정<sup>샘플</sup></span></div>
+          <div class="fbtn" style="margin-top:14px;background:#c4c7cd;color:#fff;cursor:default;">🔔 모금 시작 알림 신청 (기부하기 비활성)</div>
+          <div class="note">🔗 <b>출시 타이밍 디커플링</b> — 모금형이지만 <b>아직 e음 미등록</b>이라 <b>[기부하기] 비활성</b>. <b>BO 이야기 콘텐츠는 먼저 게시</b>, 모금 버튼은 <b>e음 등록(2026.8) 후 활성</b>. 활성화되면 천원세탁과 동일한 모금 위젯(달성률·목표·기부하기)으로 전환. 근거 [[20260627] 기부사업 vs 지정기부 IA 구분(타이밍 디커플링).</div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">5</div>
+        <div class="block"><div class="head"><h2>사업 개요</h2><span class="s" style="color:#b5651d;">⚠️ 김희선 주무관 자료 미수령 — 아래는 골격(샘플), 수령 후 확정</span></div>
+          <div class="infolist">
+            <div class="r"><div class="k">유형</div><div class="v"><b>지정기부</b>(모금형) · 기저귀 지원</div></div>
+            <div class="r"><div class="k">추진근거</div><div class="v smp">관련 법령 — 자료 수령 후 확정<sup>샘플</sup></div></div>
+            <div class="r"><div class="k">대상</div><div class="v smp">지원 대상 — 자료 수령 후 확정<sup>샘플</sup></div></div>
+            <div class="r"><div class="k">내용</div><div class="v smp">지원 내용·한도 — 자료 수령 후 확정<sup>샘플</sup></div></div>
+            <div class="r"><div class="k">모금 시작</div><div class="v"><b>2026년 8월 예정</b> (e음 등록 시점)</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">6</div>
+        <div class="block"><div class="head"><h2>사업 내용</h2></div>
+          <div class="notice smp">· 기저귀 지원 사업의 구체 내용(대상·지원 한도·수행 방식)은 <b>김희선 주무관 자료 수령 후 작성</b><br>· 골격: 천원세탁과 동일한 모금형 상세 구조(BO 이야기 + e음 모금 위젯)<br>· 모금은 2026년 8월 시작 예정<sup>샘플·골격</sup></div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">7</div>
+        <div class="block"><div class="head"><h2>기부내역 · 응원하기</h2><span class="s">모금 시작 후 표시</span></div>
+          <div class="emptybox">모금 시작 전 — 기부내역·응원 메시지는 <b>2026년 8월 모금 개시 후</b> 표시됩니다.</div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">8</div>
+        <div class="footer"><div class="ftop"><b>개인정보처리방침</b><span>이용약관</span><span>공지사항</span><span>나의 답례품 문의</span></div>
+          <div class="cols"><div class="info"><div class="logo2">ⓔ 제너두</div>대표자: 송동진 &nbsp;|&nbsp; 사업자등록번호: 104-81-56237<span class="cpr">COPYRIGHT ⓒ 이제너두(주) ALL RIGHTS RESERVED.</span></div>
+          <div class="cs"><div class="csnum">고객센터 1899-0522</div><div class="hours">평일 09:00-18:00</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="desc-col"><div class="desc"><h3>Description — EV-02 통합형(B안) 기저귀 (PC)</h3>
+      <table class="d">
+        <tr><th class="n">#</th><th class="area">영역</th><th>설명</th></tr>
+        <tr><td class="n">—</td><td class="area">★모금형·모금 미시작</td><td><span class="badge b-open">상태</span><b>4번째 케이스</b> — 모금형이나 <b>모금 미시작(8월 예정)</b>. <b>출시 타이밍 디커플링</b>: BO 이야기 먼저 게시, [기부하기]는 e음 등록(8월) 후 활성. 활성 시 천원세탁과 동일 위젯으로 전환.</td></tr>
+        <tr><td class="n">4</td><td class="area">모금 위젯(예정)</td><td><span class="badge b-fix">확정</span>비활성(점선·0%·D-DAY 미정)·[기부 알림 신청]. e음 등록 후 달성률·목표·기부하기 활성.</td></tr>
+        <tr><td class="n">5·6·7</td><td class="area">개요·내용·기부내역</td><td><span class="badge b-open">미수령</span><b>김희선 주무관 자료 미수령</b> → 골격(샘플)만. 수령 후 천원세탁 수준으로 확정. 기부내역·응원은 모금 개시 후 표시.</td></tr>
+      </table>
+    </div></div>
+  </div>
+</div>
+
+<!-- =================================================================== -->
+<!-- PAGE 6b-8 · EV-02 통합형 기부사업 상세 (PC) — 천원돌봄 (집행형 추정 · B안 변형) -->
+<!-- =================================================================== -->
+<div class="pageblock p-event">
+  <div class="inner">
+    <div class="plabel"><span class="id">EV-02</span> 기부사업 상세 <b style="color:#b5651d;">통합형(B안)</b> (천원돌봄) <small>PC · 집행형 추정 — §모금 위젯 자리에 '집행 성과' + 답례품 CTA · 유형/내용 확정 전</small></div>
+    <div class="statusflag"><span class="ft">개발 상태</span><span class="it">기획 <span class="st prog">비교안</span> <b>2026-06-27</b> <span class="who">(유형=집행형 추정, 6/29 확인)</span></span><span class="it">콘텐츠 <span class="st wait">미수령</span> <span class="who">김희선 자료 대기</span></span><span class="it">퍼블 <span class="st wait">대기</span> <span class="who">P2</span></span><span class="it">기능 매핑 <span class="st wait">대기</span> <span class="who">BO 콘텐츠</span></span></div>
+    <div class="device">
+      <div class="sec"><div class="dot">1</div>
+        <div class="hd"><div class="logo">고향온 <span>| 광주 서구</span></div>
+          <div class="nav"><span>광주 서구 이야기</span><span>답례품</span><span class="on">기부사업</span><span>고향사랑안내</span></div>
+          <div class="sp"></div><div class="icons"><span>🔍</span><span>▦</span><span class="login">로그인</span></div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">2</div>
+        <div class="crumb">기부사업 <span>›</span> 천원돌봄 <span class="gov">🟢 진행중 · 집행형<sup>추정</sup></span></div>
+      </div>
+      <div class="sec"><div class="dot">3</div>
+        <div class="evhero" style="min-height:210px;"><span class="tag">천원돌봄 대표 이미지</span>
+          <span class="estat on" style="position:static;">진행중</span>
+          <div class="t smp">천원돌봄 — 사업명·문구 확정 전<sup>샘플</sup></div>
+          <div class="d smp">대상·내용은 김희선 주무관 자료 수령 후 확정<sup>샘플</sup></div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">4</div>
+        <div class="block" style="border:2px solid var(--accent);border-radius:12px;background:#eef0f2;padding:18px 20px;"><div class="head"><h2>집행 성과</h2><span class="s">📊 집행형(추정) — e음 모금 객체 없음(달성률·기부하기 미노출)</span></div>
+          <div class="stats" style="margin:6px 0 4px;">
+            <div class="stat"><b>1,000원</b><span>본인부담(천원시리즈 공통<sup>추정</sup>)</span></div>
+            <div class="stat"><b class="smp">○○명</b><span>수혜 인원<sup>샘플</sup></span></div>
+            <div class="stat"><b class="smp">○○회</b><span>누적 지원<sup>샘플</sup></span></div>
+          </div>
+          <div class="dpromo" style="margin-top:14px;"><div><h3>천원돌봄을 함께 이어가요</h3><p>답례품으로 기부하고 광주 서구의 천원 시리즈를 함께 만들어주세요</p></div><div class="btn">답례품 보러가기 →</div></div>
+          <div class="note">🔗 <b>집행형은 [기부하기]가 e음 모금이 아니라 답례품·일반기부로 유도</b>(모금 객체 없음). <b>B 통합 템플릿 동일</b>, §4만 집행 성과로 분기. ⚠️ <b>유형(집행형/모금형)·성과 수치는 6/29 확인 + 김희선 자료 수령 후 확정</b> — 만약 모금형으로 확인되면 기저귀처럼 모금 위젯으로 교체.</div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">5</div>
+        <div class="block"><div class="head"><h2>사업 개요</h2><span class="s" style="color:#b5651d;">⚠️ 김희선 주무관 자료 미수령 — 아래는 골격(샘플), 수령 후 확정</span></div>
+          <div class="infolist">
+            <div class="r"><div class="k">유형</div><div class="v"><b>집행형 추정</b> · 돌봄 서비스 지원 <span class="smp">(6/29 확인)<sup>샘플</sup></span></div></div>
+            <div class="r"><div class="k">추진근거</div><div class="v smp">관련 법령 — 자료 수령 후 확정<sup>샘플</sup></div></div>
+            <div class="r"><div class="k">대상</div><div class="v smp">거동 불편·돌봄 필요 대상 — 자료 수령 후 확정<sup>샘플</sup></div></div>
+            <div class="r"><div class="k">내용</div><div class="v smp">돌봄 지원 내용·한도 — 자료 수령 후 확정<sup>샘플</sup></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">6</div>
+        <div class="block"><div class="head"><h2>사업 내용</h2></div>
+          <div class="notice smp">· 천원돌봄 사업의 구체 내용(대상·지원 방식·한도)은 <b>김희선 주무관 자료 수령 후 작성</b><br>· 골격: 천원국시·택시와 동일한 집행형 상세 구조(BO 이야기 + 집행 성과 + 답례품 CTA)<br>· 유형이 모금형으로 확인되면 천원세탁/기저귀 구조로 전환<sup>샘플·골격</sup></div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">7</div>
+        <div class="letter"><div class="txt"><div style="font-size:13px;color:var(--accent);font-weight:700;">성과 · 감사</div>
+          <div class="quote smp">“천원돌봄 덕분에 일상의 든든함을 느낍니다.”<sup>샘플</sup></div>
+          <div class="sign smp">— 수혜 인원·지원 규모(BO 등록, 자료 수령 후)<sup>샘플</sup></div></div>
+          <div class="photo">현장 이미지</div></div>
+      </div>
+      <div class="sec"><div class="dot">8</div>
+        <div class="footer"><div class="ftop"><b>개인정보처리방침</b><span>이용약관</span><span>공지사항</span><span>나의 답례품 문의</span></div>
+          <div class="cols"><div class="info"><div class="logo2">ⓔ 제너두</div>대표자: 송동진 &nbsp;|&nbsp; 사업자등록번호: 104-81-56237<span class="cpr">COPYRIGHT ⓒ 이제너두(주) ALL RIGHTS RESERVED.</span></div>
+          <div class="cs"><div class="csnum">고객센터 1899-0522</div><div class="hours">평일 09:00-18:00</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="desc-col"><div class="desc"><h3>Description — EV-02 통합형(B안) 천원돌봄 (PC)</h3>
+      <table class="d">
+        <tr><th class="n">#</th><th class="area">영역</th><th>설명</th></tr>
+        <tr><td class="n">—</td><td class="area">★집행형 추정 인스턴스</td><td><span class="badge b-open">미확정</span>천원국시·택시와 동일 집행형 골격(§4 집행 성과 + 답례품 CTA). <b>유형(집행형/모금형)은 6/29 확인 필요</b> — 모금형이면 기저귀처럼 모금 위젯으로 교체.</td></tr>
+        <tr><td class="n">4·5·6·7</td><td class="area">성과·개요·내용</td><td><span class="badge b-open">미수령</span><b>김희선 주무관 자료 미수령</b> → 골격(샘플)만. 수령 후 천원국시 수준으로 확정. 본인부담 1,000원은 천원시리즈 공통 추정.</td></tr>
+      </table>
+    </div></div>
+  </div>
+</div>
+
+<!-- =================================================================== -->
+<!-- PAGE 6b-9 · EV-02 통합형 기부사업 상세 (PC) — 천원중개보수 (집행형 추정 · B안 변형) -->
+<!-- =================================================================== -->
+<div class="pageblock p-event">
+  <div class="inner">
+    <div class="plabel"><span class="id">EV-02</span> 기부사업 상세 <b style="color:#b5651d;">통합형(B안)</b> (천원중개보수) <small>PC · 집행형 추정 — §모금 위젯 자리에 '집행 성과' + 답례품 CTA · 유형/내용 확정 전</small></div>
+    <div class="statusflag"><span class="ft">개발 상태</span><span class="it">기획 <span class="st prog">비교안</span> <b>2026-06-27</b> <span class="who">(유형=집행형 추정, 6/29 확인)</span></span><span class="it">콘텐츠 <span class="st wait">미수령</span> <span class="who">김희선 자료 대기</span></span><span class="it">퍼블 <span class="st wait">대기</span> <span class="who">P2</span></span><span class="it">기능 매핑 <span class="st wait">대기</span> <span class="who">BO 콘텐츠</span></span></div>
+    <div class="device">
+      <div class="sec"><div class="dot">1</div>
+        <div class="hd"><div class="logo">고향온 <span>| 광주 서구</span></div>
+          <div class="nav"><span>광주 서구 이야기</span><span>답례품</span><span class="on">기부사업</span><span>고향사랑안내</span></div>
+          <div class="sp"></div><div class="icons"><span>🔍</span><span>▦</span><span class="login">로그인</span></div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">2</div>
+        <div class="crumb">기부사업 <span>›</span> 천원중개보수 <span class="gov">🟢 진행중 · 집행형<sup>추정</sup></span></div>
+      </div>
+      <div class="sec"><div class="dot">3</div>
+        <div class="evhero" style="min-height:210px;"><span class="tag">천원중개보수 대표 이미지</span>
+          <span class="estat on" style="position:static;">진행중</span>
+          <div class="t smp">천원중개보수 — 사업명·문구 확정 전<sup>샘플</sup></div>
+          <div class="d smp">대상·내용은 김희선 주무관 자료 수령 후 확정<sup>샘플</sup></div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">4</div>
+        <div class="block" style="border:2px solid var(--accent);border-radius:12px;background:#eef0f2;padding:18px 20px;"><div class="head"><h2>집행 성과</h2><span class="s">📊 집행형(추정) — e음 모금 객체 없음(달성률·기부하기 미노출)</span></div>
+          <div class="stats" style="margin:6px 0 4px;">
+            <div class="stat"><b>1,000원</b><span>본인부담(천원시리즈 공통<sup>추정</sup>)</span></div>
+            <div class="stat"><b class="smp">○○건</b><span>중개보수 지원<sup>샘플</sup></span></div>
+            <div class="stat"><b class="smp">○○가구</b><span>수혜<sup>샘플</sup></span></div>
+          </div>
+          <div class="dpromo" style="margin-top:14px;"><div><h3>천원중개보수를 함께 이어가요</h3><p>답례품으로 기부하고 광주 서구의 천원 시리즈를 함께 만들어주세요</p></div><div class="btn">답례품 보러가기 →</div></div>
+          <div class="note">🔗 <b>집행형은 [기부하기]가 e음 모금이 아니라 답례품·일반기부로 유도</b>(모금 객체 없음). <b>B 통합 템플릿 동일</b>, §4만 집행 성과로 분기. ⚠️ <b>유형(집행형/모금형)·성과 수치는 6/29 확인 + 김희선 자료 수령 후 확정</b> — 모금형으로 확인되면 기저귀처럼 모금 위젯으로 교체.</div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">5</div>
+        <div class="block"><div class="head"><h2>사업 개요</h2><span class="s" style="color:#b5651d;">⚠️ 김희선 주무관 자료 미수령 — 아래는 골격(샘플), 수령 후 확정</span></div>
+          <div class="infolist">
+            <div class="r"><div class="k">유형</div><div class="v"><b>집행형 추정</b> · 부동산 중개보수 지원 <span class="smp">(6/29 확인)<sup>샘플</sup></span></div></div>
+            <div class="r"><div class="k">추진근거</div><div class="v smp">관련 법령·조례 — 자료 수령 후 확정<sup>샘플</sup></div></div>
+            <div class="r"><div class="k">대상</div><div class="v smp">전·월세 등 거래 취약계층 — 자료 수령 후 확정<sup>샘플</sup></div></div>
+            <div class="r"><div class="k">내용</div><div class="v smp">중개보수 지원 방식·한도 — 자료 수령 후 확정<sup>샘플</sup></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">6</div>
+        <div class="block"><div class="head"><h2>사업 내용</h2></div>
+          <div class="notice smp">· 천원중개보수 사업의 구체 내용(대상·지원 방식·한도)은 <b>김희선 주무관 자료 수령 후 작성</b><br>· 골격: 천원국시·택시와 동일한 집행형 상세 구조(BO 이야기 + 집행 성과 + 답례품 CTA)<br>· 유형이 모금형으로 확인되면 천원세탁/기저귀 구조로 전환<sup>샘플·골격</sup></div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">7</div>
+        <div class="letter"><div class="txt"><div style="font-size:13px;color:var(--accent);font-weight:700;">성과 · 감사</div>
+          <div class="quote smp">“천원중개보수 덕분에 이사 부담을 덜었습니다.”<sup>샘플</sup></div>
+          <div class="sign smp">— 수혜 가구·지원 규모(BO 등록, 자료 수령 후)<sup>샘플</sup></div></div>
+          <div class="photo">현장 이미지</div></div>
+      </div>
+      <div class="sec"><div class="dot">8</div>
+        <div class="footer"><div class="ftop"><b>개인정보처리방침</b><span>이용약관</span><span>공지사항</span><span>나의 답례품 문의</span></div>
+          <div class="cols"><div class="info"><div class="logo2">ⓔ 제너두</div>대표자: 송동진 &nbsp;|&nbsp; 사업자등록번호: 104-81-56237<span class="cpr">COPYRIGHT ⓒ 이제너두(주) ALL RIGHTS RESERVED.</span></div>
+          <div class="cs"><div class="csnum">고객센터 1899-0522</div><div class="hours">평일 09:00-18:00</div></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="desc-col"><div class="desc"><h3>Description — EV-02 통합형(B안) 천원중개보수 (PC)</h3>
+      <table class="d">
+        <tr><th class="n">#</th><th class="area">영역</th><th>설명</th></tr>
+        <tr><td class="n">—</td><td class="area">★집행형 추정 인스턴스</td><td><span class="badge b-open">미확정</span>천원국시·택시와 동일 집행형 골격(§4 집행 성과 + 답례품 CTA). <b>유형(집행형/모금형)은 6/29 확인 필요</b> — 모금형이면 기저귀처럼 모금 위젯으로 교체.</td></tr>
+        <tr><td class="n">4·5·6·7</td><td class="area">성과·개요·내용</td><td><span class="badge b-open">미수령</span><b>김희선 주무관 자료 미수령</b> → 골격(샘플)만. 수령 후 천원국시 수준으로 확정. 본인부담 1,000원은 천원시리즈 공통 추정.</td></tr>
+        <tr><td class="n">—</td><td class="area">천원시리즈 완비</td><td><span class="badge b-fix">완료</span>B 통합형 6종 골격 완성: 천원세탁·국시·택시·기저귀·돌봄·중개보수. 자료 수령 후 본문 확정.</td></tr>
+      </table>
+    </div></div>
+  </div>
+</div>
+
+<!-- =================================================================== -->
+<!-- PAGE 6c · EV-01 기부사업 빈 상태 (PC) — 등록 사업 0건                 -->
+<!-- =================================================================== -->
+<div class="pageblock p-event">
+  <div class="inner">
+    <div class="plabel"><span class="id">EV-01</span> 광주 서구 기부사업 <small>PC · <b>빈 상태(미등록)</b> · 등록 기부사업 0건</small></div>
+    <div class="device">
+      <div class="sec"><div class="dot">1</div>
+        <div class="hd"><div class="logo">고향온 <span>| 광주 서구</span></div>
+          <div class="nav"><span>광주 서구 이야기</span><span>답례품</span><span class="on">기부사업</span><span>고향사랑안내</span></div>
+          <div class="sp"></div><div class="icons"><span>🔍</span><span>▦</span><span class="login">로그인</span></div>
+        </div>
+      </div>
+      <div class="sec"><div class="dot">2</div>
+        <div class="evhero" style="min-height:200px;"><div class="t">광주 서구의 기부금은, 이렇게 쓰입니다</div></div>
+      </div>
+      <div class="sec"><div class="dot">3</div>
+        <div class="block"><div class="head"><h2>기부사업</h2><span class="s">전체 0건</span></div>
+          <div class="emptybox" style="min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;">아직 등록된 기부사업이 없습니다.<br><span class="smp">광주 서구의 기부사업 이야기를 곧 따뜻한 소식으로 전해드릴게요.</span><br><span style="display:inline-block;margin-top:14px;padding:10px 20px;border:1px solid var(--accent);color:var(--accent);border-radius:8px;font-size:13.5px;font-weight:700;">답례품으로 기부 참여하기</span></div>
+          <div class="note">⚠️ 진행/예정 사업 모두 0건일 때의 화면. 카운터·영상 섹션도 데이터 없으면 숨김. (운영자 지적 — Empty State 누락 보완)</div>
+        </div>
+      </div>
+    </div>
+    <div class="desc-col"><div class="desc"><h3>Description — EV-01 기부사업 (PC · 빈 상태)</h3>
+      <table class="d">
+        <tr><th class="n">#</th><th class="area">영역</th><th>설명</th></tr>
+        <tr><td class="n">3</td><td class="area">빈 상태</td><td><span class="badge b-fix">확정</span>등록 0건 시 안내 + 답례품 기부 CTA. 카운터/영상/예정 섹션은 데이터 없으면 숨김.</td></tr>
+      </table>
+    </div></div>
+  </div>
+</div>
+
+
+</body>
+</html>

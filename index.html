@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>고향온 광주 서구 — 기부사업 페이지 화면설계서(SB)</title>
+<link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;font-family:'Pretendard',sans-serif;}
+  body{background:#eef0f3;color:#212529;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;}
+  .card{background:#fff;border:1px solid #d0d4d9;border-radius:16px;max-width:760px;width:100%;padding:40px;box-shadow:0 8px 30px rgba(0,0,0,.07);}
+  .tag{font-size:12px;letter-spacing:2px;color:#6b7280;font-weight:700;}
+  h1{font-size:25px;font-weight:800;margin:8px 0 6px;}
+  .sub{color:#6b7280;font-size:14px;margin-bottom:14px;}
+  .howto{background:#eef0f2;border:1px solid #cfd4da;border-radius:10px;padding:13px 16px;font-size:13px;color:#4a4f57;line-height:1.6;margin-bottom:22px;}
+  .howto b{color:#2b2f36;}
+  .sect{font-size:12px;letter-spacing:1px;color:#9aa0a8;font-weight:700;margin:6px 0 10px;}
+  .v{display:flex;align-items:center;gap:14px;padding:18px;border:1px solid #e1e4e8;border-radius:10px;margin-bottom:10px;text-decoration:none;color:inherit;transition:.15s;}
+  .v:hover{border-color:#4d535b;background:#eef0f2;}
+  .v.latest{border-color:#4d535b;background:#eef0f2;border-width:2px;}
+  .v .ic{font-size:24px;width:34px;text-align:center;}
+  .v .ver{font-weight:800;font-size:16px;}
+  .v .desc{flex:1;font-size:13.5px;color:#444;}
+  .v .desc small{display:block;color:#7a8089;font-size:12px;margin-top:3px;}
+  .v .badge{font-size:11px;font-weight:700;color:#fff;background:#4d535b;padding:2px 8px;border-radius:10px;}
+  .pages{font-size:12.5px;color:#6b7280;margin:2px 0 22px 2px;line-height:1.8;}
+  .pages b{color:#212529;}
+  .foot{margin-top:20px;font-size:12px;color:#9aa0a8;line-height:1.6;}
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="tag">SCREEN DESIGN DOCUMENT · DONATION</div>
+    <h1>고향온 · 광주 서구 — 기부사업 페이지 SB</h1>
+    <div class="sub">구 '이벤트'(EV-01) → '기부사업' 전면개편 · 천원시리즈 스토리텔링 · 이미지=회색 영역</div>
+
+    <div class="howto">
+      📐 <b>별도 repo · 통합 import 방식</b> — 기부사업(EV) 화면만 추려 별도 등록한 repo입니다. 본 SB 전체(<code>gohyangon_sb</code>)에서 <b>필요한 기부사업 페이지만 플러그인(html.to.design)으로 깔끔하게 import</b>하기 위함. PC·MO 각 1파일에 세로 적층 → <b>2번의 import로 끝</b>. 세부 수정은 import 후 Figma에서.
+    </div>
+
+    <div class="sect">기부사업 화면 (통합 · 권장)</div>
+    <a class="v latest" href="all_pc.html">
+      <span class="ic">🖥️</span>
+      <span class="desc"><span class="ver">기부사업 — PC</span><small>EV-01 목록/진입 + EV-02 상세(천원시리즈 A분리형·B통합형 6종) + 빈상태 (1회 import)</small></span>
+      <span class="badge">PC</span>
+    </a>
+    <a class="v latest" href="all_mo.html">
+      <span class="ic">📱</span>
+      <span class="desc"><span class="ver">기부사업 — MO</span><small>EV-01 목록/진입 + SG-02 지정기부 모금상세 + EV-02 상세(B통합형 6종·이벤트상세) (1회 import)</small></span>
+      <span class="badge">MO</span>
+    </a>
+
+    <div class="pages">
+      <b>포함 페이지</b><br>
+      · <b>EV-01 기부사업 목록/진입</b> — 천원시리즈 전시(모금/이야기/예정/영상), 빈상태(0건) 포함<br>
+      · <b>EV-02 기부사업 상세</b> — 천원국시·천원택시·천원세탁(A 분리형) + <b>통합형(B안) 6종</b>(세탁·국시·택시·기저귀·돌봄·중개보수)<br>
+      · <b>SG-02 지정기부 상세(모금)</b> — e음 API 모금화면(EV-02 [기부하기] → 이 화면) <span style="color:#9aa0a8;">※ MO만</span><br>
+      · <b>A안 vs B안</b> — A 분리형(이야기→SG-02 모금) / B 통합형(이야기+모금 한 페이지) · 6/29 택1 검토용
+    </div>
+
+    <div class="howto" style="background:#f1f6ff;border-color:#bcd3f0;color:#2a4d80;">
+      📌 <b>기획 메모</b> — ① <b>지정기부 일원화(2026-06-27)</b>: 지정기부 별도 메뉴 없이 기부사업 §모금 섹션으로 흡수(e음 API 0건이라 별도 페이지 텅 빔). ② <b>유형 분기</b>: 모금형(세탁·기저귀=e음 모금 위젯) / 집행형(국시·택시=집행 성과+답례품 CTA). ③ <b>타이밍 디커플링</b>: 기저귀=이야기 먼저 게시, 모금 버튼은 e음 등록(8월) 후 활성. ④ 천원돌봄·중개보수·기저귀 = 김희선 자료 미수령 → 골격(샘플) 표기.
+    </div>
+
+    <div class="foot">
+      각 문서: 번호 인디케이터 ↔ Description 표 · 회색 박스=이미지 영역 · 점선 텍스트=BO 데이터(샘플).<br>
+      앵커 기획 = '기부사업 페이지 추가기획 안건(천원시리즈·EV→기부사업 전환)'. 전체 SB = <code>consthwi/gohyangon_sb</code>.
+    </div>
+  </div>
+</body>
+</html>
