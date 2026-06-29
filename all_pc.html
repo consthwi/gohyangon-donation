@@ -117,6 +117,11 @@
   .ccard .cbody{ padding:12px 14px; } .ccard .ctitle{ font-size:14px; font-weight:600; } .ccard .cmeta{ font-size:12px; color:var(--sub); margin-top:4px; }
   .ctype{ display:inline-block; font-size:10.5px; font-weight:700; border-radius:4px; padding:1px 7px; margin-bottom:6px; }
   .ctype.vid{ background:#2b2f36; color:#fff; } .ctype.mag{ background:#eef0f3; color:#555; border:1px solid var(--line); } .ctype.post{ background:#eceef1; color:#4d535b; border:1px solid #c4c8ce; }
+  /* 영상 가로 1행 + 다음 아이템 peek(살짝 걸침) → 옆으로 더 있음을 암시 */
+  .vidwrap{ position:relative; }
+  .vidwrap::after{ content:''; position:absolute; top:0; right:0; bottom:12px; width:60px; background:linear-gradient(to right, rgba(255,255,255,0), #fff 80%); pointer-events:none; }
+  .vidrow{ display:flex; gap:16px; overflow-x:auto; padding-bottom:12px; scroll-snap-type:x proximity; }
+  .vidrow .ccard{ flex:0 0 360px; scroll-snap-align:start; }
 
   /* 답례품 후기 (생생) */
   .reviews{ padding:34px 28px; border-bottom:1px solid var(--line); }
@@ -436,13 +441,15 @@
       </div>
       <div class="sec"><div class="dot">7</div>
         <div class="block"><div class="head"><h2>영상으로 보는 광주 서구 기부사업</h2><span class="s">기부금이 만든 변화의 현장 — 사업별 영상·뉴스 (BO 등록)</span></div>
-          <div class="grid3">
-            <div class="ccard"><div class="cimg">▶</div><div class="cbody"><span class="ctype vid">영상</span> <span class="gbadge gen">천원국시</span><div class="ctitle">천원국시 7호점 개소 영상</div></div></div>
-            <div class="ccard"><div class="cimg">▶</div><div class="cbody"><span class="ctype vid">영상</span> <span class="gbadge gen">천원국시</span><div class="ctitle">천원국시 관련 뉴스</div></div></div>
-            <div class="ccard"><div class="cimg">▶</div><div class="cbody"><span class="ctype vid">영상</span> <span class="gbadge gen">천원국시</span><div class="ctitle">천원국시 10호점 개소 영상</div></div></div>
-            <div class="ccard" style="opacity:.7;border-style:dashed;"><div class="cimg">＋</div><div class="cbody"><span class="ctype">등록 영역</span> <span class="gbadge des">다른 기부사업</span><div class="ctitle smp">기부사업별 영상·뉴스 추가 영역<sup>샘플</sup></div></div></div>
+          <div class="vidwrap">
+            <div class="vidrow">
+              <div class="ccard"><div class="cimg">▶</div><div class="cbody"><span class="ctype vid">영상</span> <span class="gbadge gen">천원국시</span><div class="ctitle">천원국시 7호점 개소 영상</div></div></div>
+              <div class="ccard"><div class="cimg">▶</div><div class="cbody"><span class="ctype vid">영상</span> <span class="gbadge gen">천원국시</span><div class="ctitle">천원국시 관련 뉴스</div></div></div>
+              <div class="ccard"><div class="cimg">▶</div><div class="cbody"><span class="ctype vid">영상</span> <span class="gbadge gen">천원국시</span><div class="ctitle">천원국시 10호점 개소 영상</div></div></div>
+              <div class="ccard" style="opacity:.7;border-style:dashed;"><div class="cimg">＋</div><div class="cbody"><span class="ctype">등록 영역</span> <span class="gbadge des">다른 기부사업</span><div class="ctitle smp">기부사업별 영상·뉴스 추가 영역<sup>샘플</sup></div></div></div>
+            </div>
           </div>
-          <div class="note">💡 <b>광주 서구 기부사업 전체의 영상·뉴스를 한 섹션에 통합 노출</b>(BO 콘텐츠 · 기부사업별 등록). 천원시리즈에 국한하지 않고 <b>광주 서구의 모든 기부사업 관련 영상</b>을 담을 수 있음. <b>현재는 천원국시 영상만 자산 확보</b>(주무관 제공 유튜브 3편: 7호점·뉴스·10호점), 다른 기부사업 영상은 자료 수령 시 같은 영역에 추가 등록.</div>
+          <div class="note">💡 <b>가로 1행 나열 + 다음 영상이 살짝 걸쳐 보이게</b> 하여 “옆으로 더 있음”을 암시(옆으로 스크롤). <b>광주 서구 기부사업 전체의 영상·뉴스를 한 섹션에 통합 노출</b>(BO 콘텐츠 · 기부사업별 등록) — 천원시리즈에 국한하지 않음. <b>현재는 천원국시 영상만 자산 확보</b>(주무관 제공 유튜브 3편: 7호점·뉴스·10호점), 다른 기부사업 영상은 자료 수령 시 같은 영역에 추가 등록.</div>
         </div>
       </div>
       <div class="sec"><div class="dot">8</div>
