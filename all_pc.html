@@ -368,6 +368,27 @@
   .anno::before{ content:''; position:absolute; left:-26px; top:13px; width:26px; border-top:2px dashed #e0a200; }
   .anno::after{ content:''; position:absolute; left:-32px; top:8px; width:11px; height:11px; border-radius:50%; background:#e0a200; box-shadow:0 0 0 3px #fff8e1; }
   .annocap{ width:100%; max-width:1280px; background:#fff8e1; border:1px solid #e7d68a; border-radius:8px; padding:9px 14px; font-size:12.5px; color:#7a5a00; font-weight:600; }
+
+  /* ===== 분석 보드 (메인페이지 영향 분석) ===== */
+  .pageblock.p-analysis{ background:#e9edf1; }
+  .anhi{ width:100%; max-width:1280px; background:#1c2530; color:#e7edf3; border-radius:12px; padding:20px 24px; font-size:14px; line-height:1.75; }
+  .anhi b{ color:#ffd479; } .anhi .h{ font-size:16px; font-weight:800; color:#fff; margin-bottom:8px; display:block; }
+  .anpanel{ width:100%; max-width:1280px; background:#fff; border:1px solid var(--line); border-radius:12px; padding:22px 26px; }
+  .anpanel h3{ font-size:17px; font-weight:800; margin-bottom:4px; }
+  .anpanel .lead{ font-size:13px; color:var(--sub); line-height:1.7; margin-bottom:16px; }
+  .mmap{ display:flex; flex-direction:column; gap:7px; }
+  .mmrow{ display:flex; gap:12px; align-items:flex-start; border:1px solid var(--line); border-radius:8px; padding:10px 14px; font-size:13px; background:#fafbfc; }
+  .mmrow.focus{ background:#fff7e6; border-color:#e7d68a; }
+  .mmrow .mi{ width:20px; height:20px; border-radius:50%; background:var(--accent); color:#fff; font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; flex:none; }
+  .mmrow .mt{ flex:1; line-height:1.55; } .mmrow .mt b{ font-weight:800; }
+  .antag{ display:inline-block; font-size:10.5px; font-weight:800; border-radius:5px; padding:2px 9px; flex:none; white-space:nowrap; }
+  .antag.keep{ background:#e6f0e8; color:#2e7d4f; } .antag.change{ background:#fff3e0; color:#b5651d; } .antag.hot{ background:#fbe4de; color:#c0392b; }
+  .angrid{ display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+  .ancard{ border:1px solid var(--line); border-radius:10px; padding:15px 17px; background:#fafbfc; }
+  .ancard .tt{ font-size:14px; font-weight:800; margin-bottom:11px; display:flex; align-items:center; gap:7px; flex-wrap:wrap; }
+  .ancard .row{ font-size:12.6px; line-height:1.62; margin-bottom:8px; color:#333; }
+  .ancard .row .lab{ display:inline-block; font-weight:800; font-size:10px; padding:1px 6px; border-radius:4px; margin-right:5px; vertical-align:1px; }
+  .lab.now{ background:#eceef1; color:#4d535b; } .lab.iss{ background:#fbe9e7; color:#b5471d; } .lab.fix{ background:#e6f0e8; color:#2e7d4f; }
 </style>
 </head>
 <body>
@@ -1254,6 +1275,106 @@
         <tr><td class="n">3</td><td class="area">빈 상태</td><td><span class="badge b-fix">확정</span>등록 0건 시 안내 + 답례품 기부 CTA. 카운터/영상/예정 섹션은 데이터 없으면 숨김.</td></tr>
       </table>
     </div></div>
+  </div>
+</div>
+
+<!-- =================================================================== -->
+<!-- PAGE A1 · MA-01 메인페이지 ▷ 기부사업 페이지 전환 영향 분석 (PC)         -->
+<!-- =================================================================== -->
+<div class="pageblock p-analysis">
+  <div class="inner">
+    <div class="plabel"><span class="id">MA-01 ▷ 분석</span> 메인페이지 — ‘기부사업 페이지’ 전환에 따른 개편·고려사항 심층 분석 <small>PC · 2026-06-29 · 근거 raw/_new/20260629_기부사업페이지재기획_메인페이지변동 (Frame 1.pdf · 메인 기부사업 섹션 캡처)</small></div>
+
+    <div class="anhi">
+      <span class="h">핵심 한 줄</span>
+      기부사업이 <b>독립 페이지(EV-01)로 분리·일원화</b>되면, 메인의 두 기부사업 섹션은 “전체를 진열하는 곳”에서 <b>“요약·관문(teaser→유도)”</b>으로 역할이 바뀌어야 한다. 동시에 김희선 주무관 논의로 <b>실제 기부사업 수가 적다는 사실</b>이 드러나, 메인의 <b>‘과거 사업 5-카드 그리드’와 ‘완료 18건’ 수치를 실측에 맞게 축소·정직화</b>해야 한다.
+    </div>
+
+    <div class="anpanel">
+      <h3>1. 현재 메인페이지(MA-01) 섹션 인벤토리 — 기부사업 관련 2개 식별</h3>
+      <div class="lead">Frame 1.pdf 기준. 🟡 = 이번 기부사업 페이지 전환의 직접 영향 섹션.</div>
+      <div class="mmap">
+        <div class="mmrow"><div class="mi">H</div><div class="mt"><b>헤더(GNB)</b> — LOGO · 광주서구 이야기 · 답례품 · <b>지정기부</b> · <b>이벤트</b> · 고향사랑안내</div><span class="antag change">변경(일원화)</span></div>
+        <div class="mmrow"><div class="mi">1</div><div class="mt"><b>히어로</b> — “도심 속 일상과 예술이 공존하는 곳, 광주 서구 기부…” (지역 브랜드)</div><span class="antag keep">유지</span></div>
+        <div class="mmrow"><div class="mi">2</div><div class="mt"><b>프로모션 배너</b> — 2026년 고향사랑기부제 공제율 최대 44% 확대</div><span class="antag keep">유지</span></div>
+        <div class="mmrow"><div class="mi">3</div><div class="mt"><b>광주 서구 인기 답례품 BEST</b> — 답례품 4종 카드 (커머스)</div><span class="antag keep">유지</span></div>
+        <div class="mmrow"><div class="mi">4</div><div class="mt"><b>광주 서구를 응원하는 마음</b> — 응원 메시지 카드</div><span class="antag keep">유지</span></div>
+        <div class="mmrow focus"><div class="mi">5</div><div class="mt">🟡 <b>광주 서구가 전하고 싶은 이야기</b> — “여러분의 기부 한 걸음이 우리동네 아이들의 든든한 한 끼” + 이미지 <span style="color:var(--sub);">(= 기부사업 스토리 teaser)</span></div><span class="antag change">변경(연결)</span></div>
+        <div class="mmrow focus"><div class="mi">6</div><div class="mt">🟡 <b>당신의 기부가 만든 변화</b> — 지표(참여 1,240명·누적 3.2억·진행 4건·완료 18건) + <b>과거 기부사업 5-카드 그리드</b> <span style="color:var(--sub);">(= ‘기부사업(전 지정기부)’ 진열)</span></div><span class="antag hot">★핵심 변경</span></div>
+        <div class="mmrow focus"><div class="mi">7</div><div class="mt">🟡 <b>이 변화를 이어가기</b> — 진행중 1건 featured(D-12·68% 달성·1,030,000원·참여) <span style="color:var(--sub);">(= 기부사업 페이지로 유도하는 ‘관문’)</span></div><span class="antag hot">★핵심 변경</span></div>
+        <div class="mmrow"><div class="mi">8</div><div class="mt"><b>광주 서구가 전하는 소식</b> — 영상·이미지 카드(캠페인 영상·복지원 안내·천원의 행복…)</div><span class="antag change">변경(자산 공유)</span></div>
+        <div class="mmrow"><div class="mi">F</div><div class="mt"><b>푸터</b> — 이제너두</div><span class="antag keep">유지</span></div>
+      </div>
+    </div>
+
+    <div class="anpanel">
+      <h3>2. 변경을 부르는 3가지 트리거</h3>
+      <div class="lead">운영자 지적 + 6/29 김희선 논의 정리.</div>
+      <div class="angrid">
+        <div class="ancard"><div class="tt">① 기부사업 전용 페이지 신설(일원화)</div>
+          <div class="row">지정기부 + 이벤트 + 기부사업 이야기를 <b>EV-01 한 페이지</b>로 통합. → 메인이 “전체 진열”을 중복으로 들고 있을 이유가 사라짐. 메인 = <b>요약·관문</b>으로 역할 이동.</div></div>
+        <div class="ancard"><div class="tt">② 과거 기부사업 카드 개수 대폭 축소 가능</div>
+          <div class="row">기존: “여태까지 한 많은 기부내역”을 전제로 <b>5-카드 그리드</b> 기획. <span class="lab iss">이슈</span>김희선 주무관 논의로 <b>실제 광주 서구 기부사업 수가 적다</b>는 점 확인 → 5칸이 비거나 1~2개로 축소될 수 있음. ‘완료 18건’ 수치 신뢰성도 재확인 필요.</div></div>
+        <div class="ancard"><div class="tt">③ GNB 일원화</div>
+          <div class="row">현재 메인 GNB는 <b>‘지정기부’·‘이벤트’가 별도 메뉴</b>. 일원화 결정(2026-06-27)에 따라 <b>‘기부사업’ 단일 메뉴</b>로 교체 필요(EV 페이지 헤더엔 이미 반영, 라이브 메인은 미반영).</div></div>
+        <div class="ancard"><div class="tt">데이터 출처 = 같은 곳에서</div>
+          <div class="row">메인 진열/관문 카드와 기부사업 페이지(EV-01 §4 e음 모금 / §5·6 BO 이야기)는 <b>동일 데이터 소스</b>를 써야 일관. 메인만 별도 하드코딩 시 불일치.</div></div>
+      </div>
+    </div>
+
+    <div class="anpanel">
+      <h3>3. 심층 분석 — 메인 섹션별 개편·고려사항</h3>
+      <div class="lead">각 카드: <span class="lab now">현황</span> 지금 / <span class="lab iss">이슈</span> 문제 / <span class="lab fix">제안</span> 방향.</div>
+      <div class="angrid">
+
+        <div class="ancard"><div class="tt">🟡 §6 “당신의 기부가 만든 변화” (진열형) <span class="antag hot">★</span></div>
+          <div class="row"><span class="lab now">현황</span>지표 4종 + 과거 사업 <b>5-카드 그리드</b>로 “많이 해왔다”를 연출.</div>
+          <div class="row"><span class="lab iss">이슈</span>① 실제 사업 수가 적어 <b>5칸이 빈약/공백</b>. ② 기부사업 페이지(EV-01 §5·6 진행/완료)와 <b>진열 중복</b>. ③ ‘완료 18건’이 광주 서구 실측인지 불명(타지자체·샘플 혼입 가능).</div>
+          <div class="row"><span class="lab fix">제안</span>지표는 <b>요약 KPI로 유지</b>(실측 확정 후). 카드는 <b>대표 1~3개 + “전체 보기 → 기부사업”</b>으로 축소하거나, 개수가 적으면 <b>가로 1행+peek</b>(§7 영상 패턴 재사용)로 빈약함 회피. 전체 카탈로그는 EV-01에 위임.</div></div>
+
+        <div class="ancard"><div class="tt">🟡 §7 “이 변화를 이어가기” (관문형) <span class="antag hot">★</span></div>
+          <div class="row"><span class="lab now">현황</span>진행중 1건 featured(D-12·68%·참여) → 기부사업으로 유도하는 관문.</div>
+          <div class="row"><span class="lab iss">이슈</span>‘D-day·달성률·참여’는 <b>지정기부(모금형)</b> 포맷 → 광주 서구 <b>e음 0건이면 채울 게 없음</b>. 집행형(국시·택시)은 달성률이 없어 같은 카드로 표현 불가.</div>
+          <div class="row"><span class="lab fix">제안</span>관문 역할은 <b>강화·유지</b>하되, featured 데이터 소스를 EV-01과 동일하게(① e음 진행중 있으면 모금형 카드 / ② 없으면 집행형 ‘성과+이야기’ 카드)로 <b>분기</b>. 클릭 → EV-02 상세. <b>빈 상태(0건) 폴백</b> 정의.</div></div>
+
+        <div class="ancard"><div class="tt">🟡 §5 “전하고 싶은 이야기” (스토리 teaser)</div>
+          <div class="row"><span class="lab now">현황</span>급식(천원국시 계열) 스토리 1개 + 이미지.</div>
+          <div class="row"><span class="lab iss">이슈</span>기부사업 페이지 §5 ‘이야기’와 <b>콘텐츠 중복</b> 가능. 어떤 사업을 메인 대표로 둘지 기준 없음.</div>
+          <div class="row"><span class="lab fix">제안</span>메인은 <b>대표 스토리 1개(teaser)</b>만, “더 보기”로 EV-02 상세 연결. 본문은 EV가 보유(중복 작성 금지).</div></div>
+
+        <div class="ancard"><div class="tt">🟡 §8 “전하는 소식” (영상·뉴스)</div>
+          <div class="row"><span class="lab now">현황</span>영상·이미지 카드(캠페인·복지·천원의 행복).</div>
+          <div class="row"><span class="lab iss">이슈</span>EV-01 §7 ‘영상으로 보는 광주 서구 기부사업’과 <b>자산 공유/중복</b>.</div>
+          <div class="row"><span class="lab fix">제안</span>동일 자산 풀 사용. 메인=대표 일부, EV-01=전체 통합(가로 peek). 메인 카드 클릭 → EV-01 §7로.</div></div>
+
+        <div class="ancard"><div class="tt">🟡 헤더 GNB 일원화</div>
+          <div class="row"><span class="lab now">현황</span>‘지정기부’·‘이벤트’ 별도 메뉴(라이브 메인).</div>
+          <div class="row"><span class="lab iss">이슈</span>일원화 결정과 불일치. 지정기부 메뉴는 e음 0건 시 빈 페이지로 연결.</div>
+          <div class="row"><span class="lab fix">제안</span><b>‘기부사업’ 단일 메뉴</b>로 교체(→ EV-01). 라우트 정리(<code>/event*</code> 재활용 또는 신규).</div></div>
+
+        <div class="ancard"><div class="tt">📊 지표 수치 정합(1,240명·3.2억·4건·18건)</div>
+          <div class="row"><span class="lab now">현황</span>전부 샘플로 추정.</div>
+          <div class="row"><span class="lab iss">이슈</span>‘완료 18건/진행 4건’이 실제 광주 서구 값인지 불명 — 과대 표기 위험(정직성).</div>
+          <div class="row"><span class="lab fix">제안</span>출처·산출(BO 집계 vs 지자체 제공) 확정 후 노출(6/29 C-2와 동일 안건). 실측이 작으면 지표 구성 자체 재설계(예: ‘참여 기부자/누적 기부금’ 중심).</div></div>
+
+      </div>
+    </div>
+
+    <div class="anpanel">
+      <h3>4. 결론 — IA 원칙 & 결정 필요</h3>
+      <div class="angrid">
+        <div class="ancard"><div class="tt">관통 원칙</div>
+          <div class="row">• <b>메인 = 요약·teaser·관문</b> / <b>기부사업 페이지(EV-01) = 전체 카탈로그·상세·모금</b>. 중복 진열 제거.</div>
+          <div class="row">• <b>단일 데이터 소스</b>: 메인 카드·지표 ↔ EV-01(e음 API + BO) 동일 출처. 빈 상태(0건) 폴백 일관.</div>
+          <div class="row">• <b>적은 개수 정직 대응</b>: 5-카드 고정 → 대표 소수 + 더보기, 또는 가로 peek. 수치 과대표기 금지.</div></div>
+        <div class="ancard"><div class="tt">결정·확인 필요(누구에게)</div>
+          <div class="row"><span class="lab iss">강휘원</span>메인 §6 카드 축소 방식(대표 N개+더보기 vs 가로 peek), 관문(§7) 강화 범위.</div>
+          <div class="row"><span class="lab iss">김희선</span>실제 진행/완료 사업 수·완료 18건 실체, 지표 수치 출처(6/29 C-2).</div>
+          <div class="row"><span class="lab iss">개발</span>GNB 일원화 라우팅, 메인 featured/카드의 e음·BO 데이터 연동 방식.</div>
+          <div class="row" style="margin-top:4px;color:var(--sub);">↳ 별도 메인 개편 SB(MA-01 after)는 본 분석 확정 후 작성 — 본 페이지는 <b>분석·합의용</b>.</div></div>
+      </div>
+    </div>
+
   </div>
 </div>
 
