@@ -1286,8 +1286,8 @@
     <div class="plabel"><span class="id">MA-01 ▷ 분석</span> 메인페이지 — ‘기부사업 페이지’ 전환에 따른 개편·고려사항 심층 분석 <small>PC · 2026-06-29 · 근거 raw/_new/20260629_기부사업페이지재기획_메인페이지변동 (Frame 1.pdf · 메인 기부사업 섹션 캡처)</small></div>
 
     <div class="anhi">
-      <span class="h">핵심 한 줄</span>
-      기부사업이 <b>독립 페이지(EV-01)로 분리·일원화</b>되면, 메인의 두 기부사업 섹션은 “전체를 진열하는 곳”에서 <b>“요약·관문(teaser→유도)”</b>으로 역할이 바뀌어야 한다. 동시에 김희선 주무관 논의로 <b>실제 기부사업 수가 적다는 사실</b>이 드러나, 메인의 <b>‘과거 사업 5-카드 그리드’와 ‘완료 18건’ 수치를 실측에 맞게 축소·정직화</b>해야 한다.
+      <span class="h">핵심 한 줄 — “시안을 새로 그리는 게 아니라, 무엇을 꼭 바꿔야 하는가”</span>
+      현재 메인 시안은 <b>퍼블+기능 연결까지 거의 완료</b> → 구조 재설계는 비용·리스크가 크다. 기부사업 일원화로 <b>반드시 바뀌어야 하는 것은 소수</b>(GNB 메뉴·관문 링크·데이터 정합)이고, 진열 중복·UX 개선은 <b>‘하면 좋은’ 선택지</b>다. 그리고 <b>강제 변경의 발생 여부 자체가 ‘EV-01(기부사업 일원화 페이지)이 이 시안과 함께 출시되는가’에 달려 있다.</b>
     </div>
 
     <div class="anpanel">
@@ -1308,70 +1308,66 @@
     </div>
 
     <div class="anpanel">
-      <h3>2. 변경을 부르는 3가지 트리거</h3>
-      <div class="lead">운영자 지적 + 6/29 김희선 논의 정리.</div>
+      <h3>2. 변경 필요성 triage — 현재 시안(퍼블+기능 거의 완료) 기준</h3>
+      <div class="lead">재설계가 아니라 “꼭 바꿔야 하나?”의 판정. <span class="antag hot">🔴 필수</span> 정합성·링크가 깨짐 / <span class="antag change">🟡 검토</span> 개선 여지(비용 판단) / <span class="antag keep">🟢 유지</span> EV-01과 무관 / <span class="antag" style="background:#eceef1;color:#4d535b;">⚪ 어차피</span> EV-01과 무관하게 원래 해야 할 일.</div>
       <div class="angrid">
-        <div class="ancard"><div class="tt">① 기부사업 전용 페이지 신설(일원화)</div>
-          <div class="row">지정기부 + 이벤트 + 기부사업 이야기를 <b>EV-01 한 페이지</b>로 통합. → 메인이 “전체 진열”을 중복으로 들고 있을 이유가 사라짐. 메인 = <b>요약·관문</b>으로 역할 이동.</div></div>
-        <div class="ancard"><div class="tt">② 과거 기부사업 카드 개수 대폭 축소 가능</div>
-          <div class="row">기존: “여태까지 한 많은 기부내역”을 전제로 <b>5-카드 그리드</b> 기획. <span class="lab iss">이슈</span>김희선 주무관 논의로 <b>실제 광주 서구 기부사업 수가 적다</b>는 점 확인 → 5칸이 비거나 1~2개로 축소될 수 있음. ‘완료 18건’ 수치 신뢰성도 재확인 필요.</div></div>
-        <div class="ancard"><div class="tt">③ GNB 일원화</div>
-          <div class="row">현재 메인 GNB는 <b>‘지정기부’·‘이벤트’가 별도 메뉴</b>. 일원화 결정(2026-06-27)에 따라 <b>‘기부사업’ 단일 메뉴</b>로 교체 필요(EV 페이지 헤더엔 이미 반영, 라이브 메인은 미반영).</div></div>
-        <div class="ancard"><div class="tt">데이터 출처 = 같은 곳에서</div>
-          <div class="row">메인 진열/관문 카드와 기부사업 페이지(EV-01 §4 e음 모금 / §5·6 BO 이야기)는 <b>동일 데이터 소스</b>를 써야 일관. 메인만 별도 하드코딩 시 불일치.</div></div>
+        <div class="ancard"><div class="tt"><span class="antag hot">🔴 필수*</span> GNB ‘지정기부’·‘이벤트’ 메뉴</div>
+          <div class="row"><span class="lab now">현황</span>두 메뉴 별도 존재(시안 퍼블 완료).</div>
+          <div class="row"><span class="lab iss">이슈</span>일원화로 지정기부 단독 페이지가 폐지/0건이면 <b>클릭 시 빈·깨진 경험</b>. ‘이벤트’도 기부사업으로 재편 시 명칭 불일치.</div>
+          <div class="row"><span class="lab fix">제안</span>‘기부사업’ 단일 메뉴로 정리(→EV-01). <b>*단 EV-01이 이 시안과 함께 출시될 때만 ‘필수’</b>(§3).</div></div>
+
+        <div class="ancard"><div class="tt"><span class="antag hot">🔴 필수*</span> §관문 「이 변화를 이어가기」 링크 타깃</div>
+          <div class="row"><span class="lab now">현황</span>featured 카드 → (기존) 이벤트/지정기부 상세로 연결.</div>
+          <div class="row"><span class="lab iss">이슈</span>기부사업 페이지(EV-01/EV-02) 신설 시 <b>연결 대상이 바뀜</b>. 구조·디자인은 그대로, <b>링크/라우트만</b>.</div>
+          <div class="row"><span class="lab fix">제안</span>링크 타깃을 EV-01/EV-02로 교체 = <b>저비용</b>(퍼블 재작업 거의 없음).</div></div>
+
+        <div class="ancard"><div class="tt"><span class="antag change">🟡 검토</span> §진열 「만든 변화」 5-카드</div>
+          <div class="row"><span class="lab now">현황</span>과거 사업 5-카드 + 지표(퍼블 완료).</div>
+          <div class="row"><span class="lab iss">이슈</span>EV-01 §5·6과 진열 중복 · 실제 사업 수 적어 빈약 우려.</div>
+          <div class="row"><span class="lab fix">제안</span><b>구조 유지해도 작동엔 문제 없음</b> → 당장 손대지 말 것. 데이터만 채우고, 축소/가로 peek는 추후 정식 개편 때(구조 변경=퍼블 재작업=비용↑).</div></div>
+
+        <div class="ancard"><div class="tt"><span class="antag change">🟡 검토</span> §스토리 teaser · §소식·영상</div>
+          <div class="row"><span class="lab now">현황</span>스토리 1개 + 소식 영상 카드(퍼블 완료).</div>
+          <div class="row"><span class="lab iss">이슈</span>EV-01 §5 이야기·§7 영상과 자산 중복.</div>
+          <div class="row"><span class="lab fix">제안</span>유지 가능. 같은 자산 풀 공유 + 링크를 EV-01로 잇는 정도면 충분.</div></div>
+
+        <div class="ancard"><div class="tt"><span class="antag keep">🟢 유지</span> 히어로·배너·답례품 BEST·응원·푸터</div>
+          <div class="row"><span class="lab now">현황</span>지역 브랜드·커머스·응원 영역.</div>
+          <div class="row"><span class="lab fix">제안</span>기부사업 전환과 <b>무관 → 그대로 유지</b>. 변경 불필요.</div></div>
+
+        <div class="ancard"><div class="tt"><span class="antag" style="background:#eceef1;color:#4d535b;">⚪ 어차피</span> 지표·카드 데이터 실측</div>
+          <div class="row"><span class="lab now">현황</span>참여 1,240명·누적 3.2억·진행 4·완료 18 = 전부 샘플.</div>
+          <div class="row"><span class="lab iss">이슈</span><b>EV-01 때문이 아니라</b> 원래 실데이터로 채워야 함(과대표기 위험). 사업 수 적으면 ‘완료 18건’ 표기 재검토.</div>
+          <div class="row"><span class="lab fix">제안</span>김희선 실측 수령 후 채움(6/29 C-2) — EV-01 출시와 무관하게 선행.</div></div>
       </div>
     </div>
 
     <div class="anpanel">
-      <h3>3. 심층 분석 — 메인 섹션별 개편·고려사항</h3>
-      <div class="lead">각 카드: <span class="lab now">현황</span> 지금 / <span class="lab iss">이슈</span> 문제 / <span class="lab fix">제안</span> 방향.</div>
+      <h3>3. ★스윙 팩터 — “EV-01(기부사업 일원화 페이지)이 이 시안과 함께 출시되는가?”</h3>
+      <div class="lead">위 🔴필수 항목의 <b>발생 여부 자체가 여기서 갈린다</b>. 가장 먼저 확정할 것.</div>
       <div class="angrid">
-
-        <div class="ancard"><div class="tt">🟡 §6 “당신의 기부가 만든 변화” (진열형) <span class="antag hot">★</span></div>
-          <div class="row"><span class="lab now">현황</span>지표 4종 + 과거 사업 <b>5-카드 그리드</b>로 “많이 해왔다”를 연출.</div>
-          <div class="row"><span class="lab iss">이슈</span>① 실제 사업 수가 적어 <b>5칸이 빈약/공백</b>. ② 기부사업 페이지(EV-01 §5·6 진행/완료)와 <b>진열 중복</b>. ③ ‘완료 18건’이 광주 서구 실측인지 불명(타지자체·샘플 혼입 가능).</div>
-          <div class="row"><span class="lab fix">제안</span>지표는 <b>요약 KPI로 유지</b>(실측 확정 후). 카드는 <b>대표 1~3개 + “전체 보기 → 기부사업”</b>으로 축소하거나, 개수가 적으면 <b>가로 1행+peek</b>(§7 영상 패턴 재사용)로 빈약함 회피. 전체 카탈로그는 EV-01에 위임.</div></div>
-
-        <div class="ancard"><div class="tt">🟡 §7 “이 변화를 이어가기” (관문형) <span class="antag hot">★</span></div>
-          <div class="row"><span class="lab now">현황</span>진행중 1건 featured(D-12·68%·참여) → 기부사업으로 유도하는 관문.</div>
-          <div class="row"><span class="lab iss">이슈</span>‘D-day·달성률·참여’는 <b>지정기부(모금형)</b> 포맷 → 광주 서구 <b>e음 0건이면 채울 게 없음</b>. 집행형(국시·택시)은 달성률이 없어 같은 카드로 표현 불가.</div>
-          <div class="row"><span class="lab fix">제안</span>관문 역할은 <b>강화·유지</b>하되, featured 데이터 소스를 EV-01과 동일하게(① e음 진행중 있으면 모금형 카드 / ② 없으면 집행형 ‘성과+이야기’ 카드)로 <b>분기</b>. 클릭 → EV-02 상세. <b>빈 상태(0건) 폴백</b> 정의.</div></div>
-
-        <div class="ancard"><div class="tt">🟡 §5 “전하고 싶은 이야기” (스토리 teaser)</div>
-          <div class="row"><span class="lab now">현황</span>급식(천원국시 계열) 스토리 1개 + 이미지.</div>
-          <div class="row"><span class="lab iss">이슈</span>기부사업 페이지 §5 ‘이야기’와 <b>콘텐츠 중복</b> 가능. 어떤 사업을 메인 대표로 둘지 기준 없음.</div>
-          <div class="row"><span class="lab fix">제안</span>메인은 <b>대표 스토리 1개(teaser)</b>만, “더 보기”로 EV-02 상세 연결. 본문은 EV가 보유(중복 작성 금지).</div></div>
-
-        <div class="ancard"><div class="tt">🟡 §8 “전하는 소식” (영상·뉴스)</div>
-          <div class="row"><span class="lab now">현황</span>영상·이미지 카드(캠페인·복지·천원의 행복).</div>
-          <div class="row"><span class="lab iss">이슈</span>EV-01 §7 ‘영상으로 보는 광주 서구 기부사업’과 <b>자산 공유/중복</b>.</div>
-          <div class="row"><span class="lab fix">제안</span>동일 자산 풀 사용. 메인=대표 일부, EV-01=전체 통합(가로 peek). 메인 카드 클릭 → EV-01 §7로.</div></div>
-
-        <div class="ancard"><div class="tt">🟡 헤더 GNB 일원화</div>
-          <div class="row"><span class="lab now">현황</span>‘지정기부’·‘이벤트’ 별도 메뉴(라이브 메인).</div>
-          <div class="row"><span class="lab iss">이슈</span>일원화 결정과 불일치. 지정기부 메뉴는 e음 0건 시 빈 페이지로 연결.</div>
-          <div class="row"><span class="lab fix">제안</span><b>‘기부사업’ 단일 메뉴</b>로 교체(→ EV-01). 라우트 정리(<code>/event*</code> 재활용 또는 신규).</div></div>
-
-        <div class="ancard"><div class="tt">📊 지표 수치 정합(1,240명·3.2억·4건·18건)</div>
-          <div class="row"><span class="lab now">현황</span>전부 샘플로 추정.</div>
-          <div class="row"><span class="lab iss">이슈</span>‘완료 18건/진행 4건’이 실제 광주 서구 값인지 불명 — 과대 표기 위험(정직성).</div>
-          <div class="row"><span class="lab fix">제안</span>출처·산출(BO 집계 vs 지자체 제공) 확정 후 노출(6/29 C-2와 동일 안건). 실측이 작으면 지표 구성 자체 재설계(예: ‘참여 기부자/누적 기부금’ 중심).</div></div>
-
+        <div class="ancard"><div class="tt">시나리오 A — EV-01 동시 출시</div>
+          <div class="row"><span class="lab iss">결과</span>GNB 일원화 + 관문 링크 타깃 = <b>변경 필수</b>(시안 수정 발생). 단 둘 다 <b>메뉴·링크 수준</b>이라 퍼블 전면 재작업은 아님.</div>
+          <div class="row"><span class="lab fix">대응</span>GNB 1줄 교체 + featured 링크 교체 + 데이터 실측. <b>진열/스토리/소식 구조는 그대로.</b></div></div>
+        <div class="ancard"><div class="tt">시나리오 B — EV-01 후속/별도 트랙(Phase2·독립몰 정식 개편)</div>
+          <div class="row"><span class="lab iss">결과</span>현재 시안은 <b>거의 그대로 유지 가능</b>. 지정기부·이벤트 메뉴도 당장은 기존 동작 유지. 강제 변경 거의 없음.</div>
+          <div class="row"><span class="lab fix">대응</span>지금은 <b>데이터 정합만</b>. GNB·관문·진열 개편은 EV-01 정식 출시 시점에 일괄.</div></div>
       </div>
+      <div class="note" style="margin-top:14px;background:#fff7e6;border:1px solid #e7d68a;border-radius:8px;padding:11px 14px;font-size:12.5px;color:#7a5a00;">📌 CBT(허브)와 광주 서구 독립몰 정식 개편은 <b>2트랙</b>. 이 시안이 어느 트랙이며 EV-01과 동반 출시인지에 따라 A/B가 갈림 → <b>노진성·개발(최호진/문영준)에 출시 스코프 확인이 선결</b>.</div>
     </div>
 
     <div class="anpanel">
-      <h3>4. 결론 — IA 원칙 & 결정 필요</h3>
+      <h3>4. 결론 &amp; 권고</h3>
       <div class="angrid">
-        <div class="ancard"><div class="tt">관통 원칙</div>
-          <div class="row">• <b>메인 = 요약·teaser·관문</b> / <b>기부사업 페이지(EV-01) = 전체 카탈로그·상세·모금</b>. 중복 진열 제거.</div>
-          <div class="row">• <b>단일 데이터 소스</b>: 메인 카드·지표 ↔ EV-01(e음 API + BO) 동일 출처. 빈 상태(0건) 폴백 일관.</div>
-          <div class="row">• <b>적은 개수 정직 대응</b>: 5-카드 고정 → 대표 소수 + 더보기, 또는 가로 peek. 수치 과대표기 금지.</div></div>
-        <div class="ancard"><div class="tt">결정·확인 필요(누구에게)</div>
-          <div class="row"><span class="lab iss">강휘원</span>메인 §6 카드 축소 방식(대표 N개+더보기 vs 가로 peek), 관문(§7) 강화 범위.</div>
-          <div class="row"><span class="lab iss">김희선</span>실제 진행/완료 사업 수·완료 18건 실체, 지표 수치 출처(6/29 C-2).</div>
-          <div class="row"><span class="lab iss">개발</span>GNB 일원화 라우팅, 메인 featured/카드의 e음·BO 데이터 연동 방식.</div>
-          <div class="row" style="margin-top:4px;color:var(--sub);">↳ 별도 메인 개편 SB(MA-01 after)는 본 분석 확정 후 작성 — 본 페이지는 <b>분석·합의용</b>.</div></div>
+        <div class="ancard"><div class="tt">권고 — 지금은 ‘최소 변경’</div>
+          <div class="row">• 시안이 거의 완료 → <b>구조 재설계·재퍼블 금지.</b></div>
+          <div class="row">• 강제 변경은 <b>(A안일 때) GNB 메뉴 정리 + 관문 카드 링크 타깃 + 데이터 실측</b> 셋으로 최소화.</div>
+          <div class="row">• 진열 축소·가로 peek·중복 정리 등 UX 개선은 <b>EV-01 정식 개편(독립몰) 때 일괄</b> — 지금 손대면 비용 대비 효과 낮음.</div></div>
+        <div class="ancard"><div class="tt">먼저 확정할 것(순서)</div>
+          <div class="row"><span class="lab iss">1·개발/노진성</span><b>EV-01 출시 타이밍·스코프</b>(이 시안과 동반? 후속?) → §3 A/B 결정.</div>
+          <div class="row"><span class="lab iss">2·김희선</span>실제 진행/완료 사업 수·‘완료 18건’ 실체 → 데이터·표기(EV-01 무관 선행).</div>
+          <div class="row"><span class="lab iss">3·강휘원</span>A안 확정 시 GNB·관문 변경 범위 승인.</div>
+          <div class="row" style="margin-top:4px;color:var(--sub);">↳ 결론: <b>“반드시 바꿔야 하는 것은 소수, 그 발생 여부는 EV-01 타이밍에 종속.”</b> 시안 자체는 대부분 유지.</div></div>
       </div>
     </div>
 
