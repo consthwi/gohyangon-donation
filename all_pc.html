@@ -1357,23 +1357,24 @@
     </div>
 
     <div class="anpanel">
-      <h3>4. 메인 기부사업 카드 — 무엇이 뿌려지나 (예상 데이터 모델)</h3>
-      <div class="lead">운영자 가설(“e음 + 진행중 + 진행예정 모두”)에 대한 정리 — <b>맞되, ‘과거(완료)’와 ‘활성(진행중·예정)’은 섹션을 나누고, 카드 포맷은 유형별로 분기</b>한다.</div>
+      <h3>4. 메인 기부사업 카드 — 무엇이 뿌려지나 (데이터 모델·2섹션 유지)</h3>
+      <div class="lead">2섹션(진열/관문) 유지 + <b>진행중도 진열에 노출</b>(운영자 방향, 2026-06-29). 단 적은 모수·중복 회피를 위해 <b>‘성과(쓰임) vs 참여(모금)’로 분배</b> — 진행중 집행형은 ‘쓰이고 있는 변화’라 진열에 자연스럽고, 진행중 모금형은 ‘지금 참여’라 관문에.</div>
       <div class="angrid">
         <div class="ancard"><div class="tt">아이템 풀 = 2소스 병합 (EV-01과 동일 풀)</div>
           <div class="row"><span class="lab now">e음</span>지정기부 모금형(specificDonationList·광주서구 필터) — 달성률·D-day·목표·모금액. <b>현재 0건</b>.</div>
           <div class="row"><span class="lab now">BO</span>집행형(국시·택시·돌봄·중개보수) + e음 미등록 모금형(세탁·기저귀) + 예정 — 이야기·성과·상태.</div>
           <div class="row"><span class="lab fix">키</span>각 아이템 = {소스 e음/BO · 유형 모금형/집행형 · 상태 진행중/예정/완료}.</div></div>
-        <div class="ancard"><div class="tt">섹션별 무엇이 뿌려지나 (상태로 분배)</div>
-          <div class="row"><span class="lab now">§관문(지금/곧)</span><b>진행중 + 진행예정 전부</b>(e음 모금형 + BO 집행형 + 예정). = 운영자 가설 핵심 · 참여 유도.</div>
-          <div class="row"><span class="lab now">§진열(만든 변화)</span><b>완료 사업 + 누적 지표</b>(회고·실적). 진행중을 여기 섞으면 “만든 변화(과거)” 카피와 충돌.</div></div>
+        <div class="ancard"><div class="tt">섹션별 무엇이 뿌려지나 (성과 vs 참여로 분배)</div>
+          <div class="row"><span class="lab now">§진열(만든 변화)</span><b>진행중 집행형(국시·택시) + 완료</b> = ‘기부금이 쓰이고 있거나 쓰인’ 성과. 진행중이 채워줘 빈약 해소. 카피만 “쓰였어요→쓰이고 있어요·쓰였어요”.</div>
+          <div class="row"><span class="lab now">§관문(이어가기)</span><b>진행중 모금형(세탁·기저귀) + 예정 + “전체 보기→EV-01”</b> = 지금·곧 참여 CTA(모금형은 아직 모금 중이라 ‘참여’가 자연).</div>
+          <div class="row"><span class="lab fix">중복 없음</span>집행형·완료=진열 / 모금형 진행중·예정=관문 → 같은 아이템이 양쪽에 안 겹침. 모금완료→집행 전환 시 진열로 이동.</div></div>
         <div class="ancard"><div class="tt">카드 포맷 = 유형별 분기(조건부 렌더)</div>
           <div class="row"><span class="lab now">모금형(e음)</span>달성률·D-day·모금액 progress 카드.</div>
           <div class="row"><span class="lab now">집행형(BO)</span>성과(수혜·개소·편성액) 카드 — <b>달성률 없음</b>.</div>
           <div class="row"><span class="lab now">예정</span>점선·모금 시작 전·D-day 미정.</div></div>
         <div class="ancard"><div class="tt">광주서구 현재값 / 정렬</div>
-          <div class="row"><span class="lab iss">현재</span>e음 0건 → 진행중은 <b>BO 집행형(국시·택시)</b> 중심. 세탁은 BO로 노출하다 e음 등록 시 모금형 카드로 전환(타이밍 디커플링).</div>
-          <div class="row"><span class="lab fix">정렬</span>진행중(모금형 임박·달성률) → 진행중(집행형) → 예정. 완료는 §진열/지표. 메인은 소수 + “전체 보기→기부사업”.</div></div>
+          <div class="row"><span class="lab iss">현재</span>e음 0건 → §진열 = 진행중 집행형(국시·택시) + 완료 약간으로 채워짐. §관문 = 예정 위주(+ e음 등록 시 세탁 모금 카드 추가) + EV-01 유도.</div>
+          <div class="row"><span class="lab fix">정렬</span>§진열 = 진행중 먼저→완료 / §관문 = 진행중 모금형(임박) → 예정. 둘 다 소수 + “전체 보기→EV-01”.</div></div>
       </div>
     </div>
 
