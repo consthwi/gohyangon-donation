@@ -1321,10 +1321,10 @@
           <div class="row"><span class="lab iss">이슈</span>기부사업 페이지(EV-01/EV-02) 신설 시 <b>연결 대상이 바뀜</b>. 구조·디자인은 그대로, <b>링크/라우트만</b>.</div>
           <div class="row"><span class="lab fix">제안</span>링크 타깃을 EV-01/EV-02로 교체 = <b>저비용</b>(퍼블 재작업 거의 없음).</div></div>
 
-        <div class="ancard"><div class="tt"><span class="antag change">🟡 검토</span> §진열 「만든 변화」 5-카드</div>
-          <div class="row"><span class="lab now">현황</span>과거 사업 5-카드 + 지표(퍼블 완료).</div>
-          <div class="row"><span class="lab iss">이슈</span>EV-01 §5·6과 진열 중복 · 실제 사업 수 적어 빈약 우려.</div>
-          <div class="row"><span class="lab fix">제안</span><b>구조 유지해도 작동엔 문제 없음</b> → 당장 손대지 말 것. 데이터만 채우고, 축소/가로 peek는 추후 정식 개편 때(구조 변경=퍼블 재작업=비용↑).</div></div>
+        <div class="ancard"><div class="tt"><span class="antag change">🟡 결정</span> §진열 「만든 변화」 5-카드</div>
+          <div class="row"><span class="lab now">현황</span>과거(완료) 사업 5-카드 + 지표(퍼블 완료).</div>
+          <div class="row"><span class="lab iss">이슈</span>완료 사업 거의 없어 빈약 · EV-01과 중복 · 김희선 “완료 노출 불필요”(강력).</div>
+          <div class="row"><span class="lab fix">결정(6/29)</span>완료 제외, <b>진행중+예정</b>으로 채움 → 빈약 해소. <b>카피 과거→현재</b>(“쓰였어요”→“진행 중·곧 시작”). 그리드 컴포넌트·구조는 그대로(저비용).</div></div>
 
         <div class="ancard"><div class="tt"><span class="antag change">🟡 검토</span> §스토리 teaser · §소식·영상</div>
           <div class="row"><span class="lab now">현황</span>스토리 1개 + 소식 영상 카드(퍼블 완료).</div>
@@ -1337,8 +1337,8 @@
 
         <div class="ancard"><div class="tt"><span class="antag" style="background:#eceef1;color:#4d535b;">⚪ 어차피</span> 지표·카드 데이터 실측</div>
           <div class="row"><span class="lab now">현황</span>참여 1,240명·누적 3.2억·진행 4·완료 18 = 전부 샘플.</div>
-          <div class="row"><span class="lab iss">이슈</span><b>EV-01 때문이 아니라</b> 원래 실데이터로 채워야 함(과대표기 위험). 사업 수 적으면 ‘완료 18건’ 표기 재검토.</div>
-          <div class="row"><span class="lab fix">제안</span>김희선 실측 수령 후 채움(6/29 C-2) — EV-01 출시와 무관하게 선행.</div></div>
+          <div class="row"><span class="lab iss">이슈</span><b>EV-01 때문이 아니라</b> 원래 실데이터로 채워야 함(과대표기 위험). 김희선 완료 미노출 방침 → <b>‘완료 18건’ 지표도 제외</b> 방향.</div>
+          <div class="row"><span class="lab fix">제안</span>지표 = 참여자·누적기부금·진행 건수 중심. 김희선 실측 수령 후 채움(6/29 C-2) — EV-01 무관 선행.</div></div>
       </div>
     </div>
 
@@ -1357,24 +1357,24 @@
     </div>
 
     <div class="anpanel">
-      <h3>4. 메인 기부사업 카드 — 무엇이 뿌려지나 (데이터 모델·2섹션 유지)</h3>
-      <div class="lead">2섹션(진열/관문) 유지 + <b>진행중도 진열에 노출</b>(운영자 방향, 2026-06-29). 단 적은 모수·중복 회피를 위해 <b>‘성과(쓰임) vs 참여(모금)’로 분배</b> — 진행중 집행형은 ‘쓰이고 있는 변화’라 진열에 자연스럽고, 진행중 모금형은 ‘지금 참여’라 관문에.</div>
+      <h3>4. 메인 기부사업 카드 — 무엇이 뿌려지나 (확정 모델 v3 · 2섹션 유지)</h3>
+      <div class="lead">운영자+김희선 방향(2026-06-29): <b>완료(과거)는 노출 안 함</b>(김희선 강력). <b>관문 = 강조 지정기부 1건</b>(하드코딩/지자체 선택, 현재 기저귀) · <b>그 외 진행중·예정은 전부 카드</b>로.</div>
       <div class="angrid">
         <div class="ancard"><div class="tt">아이템 풀 = 2소스 병합 (EV-01과 동일 풀)</div>
           <div class="row"><span class="lab now">e음</span>지정기부 모금형(specificDonationList·광주서구 필터) — 달성률·D-day·목표·모금액. <b>현재 0건</b>.</div>
           <div class="row"><span class="lab now">BO</span>집행형(국시·택시·돌봄·중개보수) + e음 미등록 모금형(세탁·기저귀) + 예정 — 이야기·성과·상태.</div>
-          <div class="row"><span class="lab fix">키</span>각 아이템 = {소스 e음/BO · 유형 모금형/집행형 · 상태 진행중/예정/완료}.</div></div>
-        <div class="ancard"><div class="tt">섹션별 무엇이 뿌려지나 (성과 vs 참여로 분배)</div>
-          <div class="row"><span class="lab now">§진열(만든 변화)</span><b>진행중 집행형(국시·택시) + 완료</b> = ‘기부금이 쓰이고 있거나 쓰인’ 성과. 진행중이 채워줘 빈약 해소. 카피만 “쓰였어요→쓰이고 있어요·쓰였어요”.</div>
-          <div class="row"><span class="lab now">§관문(이어가기)</span><b>진행중 모금형(세탁·기저귀) + 예정 + “전체 보기→EV-01”</b> = 지금·곧 참여 CTA(모금형은 아직 모금 중이라 ‘참여’가 자연).</div>
-          <div class="row"><span class="lab fix">중복 없음</span>집행형·완료=진열 / 모금형 진행중·예정=관문 → 같은 아이템이 양쪽에 안 겹침. 모금완료→집행 전환 시 진열로 이동.</div></div>
+          <div class="row"><span class="lab fix">키</span>각 아이템 = {소스 e음/BO · 유형 모금형/집행형 · 상태 진행중/예정/<s>완료</s>}. <b>완료는 메인 미노출.</b></div></div>
+        <div class="ancard"><div class="tt">섹션별 무엇이 뿌려지나 (완료 제외)</div>
+          <div class="row"><span class="lab now">§관문(이어가기)</span><b>강조 지정기부 1건(featured)</b> — 하드코딩(Phase1)/지자체 BO 선택(Phase2). 현재 = 기저귀(8월 모금 예정). 8월 시행 후에도 ‘강조 1건’ 슬롯 유지.</div>
+          <div class="row"><span class="lab now">§진열(카드)</span><b>그 외 전부 = 진행중·예정</b>(집행형 국시·택시 + 모금형 세탁 + 예정 돌봄·중개), 완료·관문featured 제외.</div>
+          <div class="row"><span class="lab iss">완료 제외 여파</span>김희선 “이전 완료 노출 불필요”(강력) → 과거 카드 없음 ⟹ §진열 카피 <b>과거→현재</b>(“쓰였어요”→“진행 중·곧 시작”), 지표의 ‘완료 N건’도 제외 검토.</div></div>
         <div class="ancard"><div class="tt">카드 포맷 = 유형별 분기(조건부 렌더)</div>
           <div class="row"><span class="lab now">모금형(e음)</span>달성률·D-day·모금액 progress 카드.</div>
           <div class="row"><span class="lab now">집행형(BO)</span>성과(수혜·개소·편성액) 카드 — <b>달성률 없음</b>.</div>
-          <div class="row"><span class="lab now">예정</span>점선·모금 시작 전·D-day 미정.</div></div>
+          <div class="row"><span class="lab now">예정</span>점선·모금 시작 전·D-day 미정(‘곧 시작’ 뱃지).</div></div>
         <div class="ancard"><div class="tt">광주서구 현재값 / 정렬</div>
-          <div class="row"><span class="lab iss">현재</span>e음 0건 → §진열 = 진행중 집행형(국시·택시) + 완료 약간으로 채워짐. §관문 = 예정 위주(+ e음 등록 시 세탁 모금 카드 추가) + EV-01 유도.</div>
-          <div class="row"><span class="lab fix">정렬</span>§진열 = 진행중 먼저→완료 / §관문 = 진행중 모금형(임박) → 예정. 둘 다 소수 + “전체 보기→EV-01”.</div></div>
+          <div class="row"><span class="lab iss">현재</span>관문 = 기저귀(예정 강조) / 진열 = 국시·택시·세탁(진행중) + 돌봄·중개보수(예정). 완료 미노출. e음 0건이라 모금형 카드는 등록 후 활성.</div>
+          <div class="row"><span class="lab fix">정렬</span>§진열 = 진행중 먼저 → 예정. 메인은 소수 + “전체 보기→EV-01”. 관문 featured는 지자체 강조 1건.</div></div>
       </div>
     </div>
 
