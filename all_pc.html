@@ -1361,7 +1361,7 @@
       <div class="lead">운영자+김희선 방향(2026-06-29): <b>완료(과거)는 노출 안 함</b>(김희선 강력). <b>관문 = 강조 지정기부 1건</b>(하드코딩/지자체 선택, 현재 기저귀) · <b>그 외 진행중·예정은 전부 카드</b>로.</div>
       <div class="angrid">
         <div class="ancard"><div class="tt">아이템 풀 = 2소스 병합 (EV-01과 동일 풀)</div>
-          <div class="row"><span class="lab now">e음</span>지정기부 모금형(specificDonationList·광주서구 필터) — 달성률·D-day·목표·모금액. <b>현재 0건</b>.</div>
+          <div class="row"><span class="lab now">e음</span>지정기부 모금형(specificDonationList·광주서구 locgovCd 29140 필터) — 달성률·D-day·목표·모금액. <b>현재 등록 2건(천원세탁·폭우)이나 둘 다 ‘종료’(statusCd 9) → 진행중(기부 가능) 0건.</b></div>
           <div class="row"><span class="lab now">BO</span>집행형(국시·택시·돌봄·중개보수) + e음 미등록 모금형(세탁·기저귀) + 예정 — 이야기·성과·상태.</div>
           <div class="row"><span class="lab fix">키</span>각 아이템 = {소스 e음/BO · 유형 모금형/집행형 · 상태 진행중/예정/<s>완료</s>}. <b>완료는 메인 미노출.</b></div></div>
         <div class="ancard"><div class="tt">섹션별 무엇이 뿌려지나 (완료 제외)</div>
@@ -1372,9 +1372,10 @@
         <div class="ancard"><div class="tt">카드 포맷 = 유형별 분기(조건부 렌더)</div>
           <div class="row"><span class="lab now">모금형(e음)</span>달성률·D-day·모금액 progress 카드.</div>
           <div class="row"><span class="lab now">집행형(BO)</span>성과(수혜·개소·편성액) 카드 — <b>달성률 없음</b>.</div>
-          <div class="row"><span class="lab now">예정</span>점선·모금 시작 전·D-day 미정(‘곧 시작’ 뱃지).</div></div>
+          <div class="row"><span class="lab now">예정</span>점선·모금 시작 전·D-day 미정(‘곧 시작’ 뱃지).</div>
+          <div class="row"><span class="lab iss">기부가능 판정</span><b>statusCd=2(진행중)만 모금 카드·[기부하기] 활성</b>. 9(종료)는 D-day 남아도(천원세탁 D-78) 비활성·이야기로만. 판정은 status 우선(daysLeftText는 표시용).</div></div>
         <div class="ancard"><div class="tt">광주서구 현재값 / 정렬</div>
-          <div class="row"><span class="lab iss">현재</span>관문 = 기저귀(예정 강조) / 진열 = 국시·택시·세탁(진행중) + 돌봄·중개보수(예정). 완료 미노출. e음 0건이라 모금형 카드는 등록 후 활성.</div>
+          <div class="row"><span class="lab iss">현재</span>관문 = 기저귀(예정 강조) / 진열 = 국시·택시·세탁(진행중) + 돌봄·중개보수(예정). 완료 미노출. ⚠️ <b>천원세탁은 e음 등록됐으나 ‘종료’(기부 불가)</b> → 모금 카드 X·BO 이야기로만(재모금 시 모금 카드 부활). 진행중 e음 모금 = 0건.</div>
           <div class="row"><span class="lab fix">정렬</span>§진열 = 진행중 먼저 → 예정. 메인은 소수 + “전체 보기→EV-01”. 관문 featured는 지자체 강조 1건.</div></div>
       </div>
     </div>
