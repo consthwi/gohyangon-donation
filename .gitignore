@@ -1,0 +1,3 @@
+_serve.js
+.playwright-mcp/
+*.log
